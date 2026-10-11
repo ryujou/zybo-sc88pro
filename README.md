@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/readme-assets/hero.svg" alt="Zybo SC-88Pro：上位机预计算、FPGA XP3 Voice 合成与 ARM XP DSP/LSP 效果处理" width="100%">
+
 # Zybo SC-88Pro
 
 **在原版 Zybo 上，以手写 FPGA 实现 XP3 采样核心，配合上位机控制预计算与 ARM 效果处理重现 SC-88Pro 数字音源。**

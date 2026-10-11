@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">Zybo SC-88Pro: XP3 Voice synthesis and ARM effects</title>
+  <desc id="desc">The desktop precomputes MIDI and GS control parameters. Zynq PL implements the XP3 64 Voice sample core; ARM PS executes XP DSP and LSP effects. Board-generated stereo audio is cached in DDR for continuous playback.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0b1626"/><stop offset="1" stop-color="#152b3b"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#8ab3c3" stroke-opacity=".07"/>
+    </pattern>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0 0L6 3L0 6" fill="none" stroke="#54c6c1" stroke-width="1.2"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="440" rx="20" fill="url(#background)"/>
+  <rect width="1200" height="440" rx="20" fill="url(#grid)"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect x="56" y="48" width="218" height="30" rx="15" fill="#193c46" stroke="#32646c"/>
+    <circle cx="73" cy="63" r="4" fill="#68d3c7"/>
+    <text x="88" y="68" fill="#83d7ce" font-size="12" font-weight="600" letter-spacing="1.1">FPGA PCM SYNTHESIS</text>
+    <text x="54" y="157" fill="#f5f9fd" font-size="58" font-weight="700" letter-spacing="-2">ZYBO SC-88Pro</text>
+    <text x="57" y="194" fill="#d4e0ec" font-size="19" font-weight="600" letter-spacing="2">XP3 VOICE CORE + ARM EFFECTS</text>
+    <text x="57" y="235" fill="#9fb4c8" font-size="17">FPGA sample synthesis. Fixed-point effects on ARM.</text>
+    <g font-size="12" fill="#d3e2eb">
+      <rect x="57" y="268" width="112" height="32" rx="6" fill="#1c3546" stroke="#355569"/>
+      <text x="78" y="289">64 VOICES</text>
+      <rect x="181" y="268" width="143" height="32" rx="6" fill="#1c3546" stroke="#355569"/>
+      <text x="201" y="289">32 kHz STEREO</text>
+      <rect x="336" y="268" width="134" height="32" rx="6" fill="#1c3546" stroke="#355569"/>
+      <text x="356" y="289">87.11% LUT</text>
+    </g>
+
+    <rect x="792" y="44" width="348" height="78" rx="12" fill="#132d3d" stroke="#3e697a"/>
+    <rect x="792" y="44" width="5" height="78" rx="2" fill="#82b8ef"/>
+    <text x="816" y="66" fill="#93c3ef" font-size="10" font-weight="600" letter-spacing="1.8">DESKTOP / HOST</text>
+    <text x="816" y="92" fill="#edf5fa" font-size="23" font-weight="600">MIDI / GS precompute</text>
+    <text x="816" y="112" fill="#92b1c3" font-size="12">Pitch · Ramp · filter / volume controls</text>
+    <path d="M966 124V143" stroke="#54c6c1" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="983" y="138" fill="#80aaa9" font-size="10">control parameters</text>
+
+    <rect x="792" y="150" width="348" height="78" rx="12" fill="#152e3c" stroke="#76684b"/>
+    <rect x="792" y="150" width="5" height="78" rx="2" fill="#eebc74"/>
+    <text x="816" y="172" fill="#eebc74" font-size="10" font-weight="600" letter-spacing="1.8">FPGA LOGIC / PL</text>
+    <text x="816" y="198" fill="#edf5fa" font-size="23" font-weight="600">XP3 Voice</text>
+    <text x="816" y="218" fill="#aebac4" font-size="12">64 Voice · PCM / DPCM · TVF / TVA</text>
+    <path d="M977 190H993V183H1006V201H1019V176H1032V195H1045V184H1058V190H1115" fill="none" stroke="#eebc74" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M966 230V249" stroke="#54c6c1" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="983" y="244" fill="#80aaa9" font-size="10">ordered mixer sends</text>
+
+    <rect x="792" y="256" width="348" height="78" rx="12" fill="#132d3d" stroke="#3e697a"/>
+    <rect x="792" y="256" width="5" height="78" rx="2" fill="#62c9c2"/>
+    <text x="816" y="278" fill="#81d6ce" font-size="10" font-weight="600" letter-spacing="1.8">ZYNQ ARM / PS</text>
+    <text x="816" y="304" fill="#edf5fa" font-size="23" font-weight="600">XP DSP + LSP</text>
+    <text x="816" y="324" fill="#92b1c3" font-size="12">Effects → DDR audio cache → I²S / SSM2603</text>
+
+    <path d="M57 352H1140" stroke="#395568" stroke-opacity=".7"/>
+    <g font-size="11" letter-spacing="1.3" fill="#7f9eb3">
+      <text x="57" y="377">BOARD</text><text x="348" y="377">SAMPLE CORE</text><text x="660" y="377">PLAYBACK</text>
+    </g>
+    <g font-size="16" fill="#e1ebf2" font-weight="600">
+      <text x="57" y="405">Digilent Zybo / XC7Z010</text>
+      <text x="348" y="405">Handwritten XP3 Voice RTL</text>
+      <text x="660" y="405">USB parameters · DDR cache</text>
+    </g>
+    <text x="1140" y="405" text-anchor="end" fill="#62c9c2" font-size="12">Vivado / Vitis 2025.2</text>
+  </g>
+</svg>
