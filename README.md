@@ -4,7 +4,7 @@
 
 # Zybo SC-88Pro
 
-**在原版 Zybo 上，以手写 FPGA 实现 XP3 采样核心，配合上位机控制预计算与 ARM 效果处理重现 SC-88Pro 数字音源。**
+**在原版 Zybo 上，以 FPGA 实现 XP3 采样核心，配合上位机控制预计算与 ARM 效果处理重现 SC-88Pro 数字音源。**
 
 64 Voice · 32 kHz · 20 MiB Wave ROM · U 盘参数流 · XP DSP / LSP · SSM2603
 
