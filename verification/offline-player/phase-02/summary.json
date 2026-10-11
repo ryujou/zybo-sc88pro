@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "phase": 2,
+  "scope": "offline_parameter_single_voice_rtl",
+  "RTL_contract_version": 2,
+  "control_field_schema": 1,
+  "status": "通过",
+  "gate_status": {
+    "A": "通过",
+    "B": "通过",
+    "C": "通过",
+    "D": "通过"
+  },
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "resources": {
+    "LUT": 5149,
+    "FF": 3946,
+    "DSP": 3,
+    "BRAM18": 8,
+    "BRAM36": 0
+  },
+  "timing": {
+    "WNS_ns": 0.313,
+    "WHS_ns": 0.098,
+    "WPWS_ns": 4.5
+  },
+  "worst_cycles": {
+    "single": 44,
+    "pair": 82,
+    "scope": "synthetic_piano_endpoint_and_IRQ_nominal_ROM_and_ready_parameters"
+  },
+  "golden_reference": {
+    "cases": 60,
+    "frames": 15360,
+    "hooks": 18887,
+    "terminal_candidates": 1,
+    "unchanged_reference_exact": true
+  },
+  "pressure_reference": {
+    "cases": 30,
+    "frames": 7680,
+    "hooks": 16302,
+    "terminal_candidates": 0,
+    "unchanged_reference_exact": true
+  },
+  "piano_reference": {
+    "frames": 256000,
+    "state_words": 51,
+    "changed_hooks": 17677,
+    "unchanged_reference_exact": true,
+    "parameter_binary_exact": true
+  },
+  "piano_RTL": {
+    "scope": "parameter_voice_piano",
+    "success": true,
+    "hardware_verified": false,
+    "numeric_match": true,
+    "cases": 1,
+    "frames": 256000,
+    "single_cycles": 36,
+    "pair_cycles": 0,
+    "stages": 505492,
+    "parameter_hooks": 284341
+  },
+  "IRQ_RTL": {
+    "scope": "parameter_four_voice_irq_boundaries",
+    "success": true,
+    "hardware_verified": false,
+    "nominal": {
+      "commands": 5568,
+      "single_cycles": 36,
+      "pair_cycles": 69
+    },
+    "stalls": {
+      "commands": 5568,
+      "single_cycles": 92,
+      "pair_cycles": 177
+    },
+    "cases": 22,
+    "frames": 1408,
+    "compared_state_words_per_frame": 201,
+    "original_reference_exact": true,
+    "phase1_binary_exact": true
+  },
+  "verified_logical_frames": 280448
+}

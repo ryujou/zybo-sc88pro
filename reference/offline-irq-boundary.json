@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "scope": "offline_parameter_player_software",
+  "commit": "9af8bb05bcef2994b5dbb60c5c028e978a72aecb",
+  "order": [
+    "Mute at source entry",
+    "Loop on actual producer advances, including preload/refill and same-owner marker coalescing",
+    "Ramp terminal candidate after computed control delta in the selected service slot"
+  ],
+  "runtime_local": [
+    "interrupt",
+    "irqStatus",
+    "irqConfigMask",
+    "irqBlockedEvent",
+    "per-frame accepted latch",
+    "wave mute/loop marker bits",
+    "ramp hold bit17",
+    "sample phase/address/FIFO/accumulator",
+    "TVA gain/filter histories"
+  ],
+  "PC": [
+    "Ramp destination/current/scratch/curve2 pending",
+    "decoded pitch increment and TVF coefficient",
+    "combinedAmp",
+    "terminal control trigger at the actual Ramp service"
+  ],
+  "hold_rule": "Computed ramp deltas exclude bit17; host writes may set/clear it; runtime accepted terminal sets it. No golden accepted/blocked/marker/hold after-state is executable input.",
+  "stages": {
+    "1": "source initialize control, preserves original pre-pitch/pre-TVF decode inputs",
+    "2": "starting TVF ramp before entering running phase",
+    "3": "counter6 refresh after interpolation, phase advance and ROM producer, before Ramp",
+    "4": "selected Ramp service after source operations, before filter; delta precedes local terminal candidate"
+  },
+  "pair_order": "owner TVA/source including IRQ, partner TVA/source including IRQ, then paired filter; both use updated control coefficients and incoming TVA gain",
+  "feedback": "Mixer observes previous filter output; XP DSP preserves original slots; LSP SDIA return is shifted by8 and consumed in next frame",
+  "dynamic_cases": [
+    "mute_before_loop_terminal",
+    "loop_before_terminal_coalesced",
+    "pending_IRQ_blocks_other_voice",
+    "masked_loop_terminal_accepts",
+    "all_masked_unarmed",
+    "owner_mute_blocks_partner_terminal",
+    "paired_source_order",
+    "reverse_alternate_loop",
+    "initialize_pre_post_control",
+    "starting_TVF_control",
+    "parked_source",
+    "preload_markers",
+    "post_source_pitch_refresh",
+    "incoming_combinedAmp_TVA",
+    "pitch_terminal",
+    "TVF_Q_terminal",
+    "TVF_F_terminal",
+    "amp_mod_terminal",
+    "held_pending_destination",
+    "masked_mute_terminal_accepts",
+    "amp_curve2_boundary",
+    "amp_curve3_zero_boundary"
+  ],
+  "probe": "three separately linked XP originals/export/consumer; same authored initial fixture, every subsequent frame advances independently; compare 202 words at all64 frames",
+  "unresolved_numeric_dependencies": [],
+  "hardware_verified": false,
+  "candidate_rule": "Unarmed or masked terminal calls return before arbitration and are omitted losslessly; all potentially accepted or blocked candidates still execute runtime-local arbitration."
+}

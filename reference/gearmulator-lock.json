@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/dsp56300/gearmulator.git",
+  "commit": "9af8bb05bcef2994b5dbb60c5c028e978a72aecb",
+  "license": "GPL-3.0",
+  "build": "SC-88Pro board and its unmodified transitive source dependencies, C++20, MSVC x64 Release",
+  "definitions": ["CHIPS_FORCE_NO_JIT=1"],
+  "submodules_required": [],
+  "capture": "emu88Lib::Sc88Pro::renderSample()",
+  "registry": "source/ronaldo/88emu/88lib/rom/romRegistry.h"
+}

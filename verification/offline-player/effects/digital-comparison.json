@@ -1,0 +1,22 @@
+{
+  "boot": {
+    "success": true,
+    "frames": 256000,
+    "samples": 512000,
+    "max_absolute_error": 0,
+    "peak_error": 0,
+    "rms_error": 0,
+    "first_difference": null
+  },
+  "native": {
+    "success": true,
+    "frames": 2089791,
+    "samples": 4179582,
+    "max_absolute_error": 0,
+    "peak_error": 0,
+    "rms_error": 0,
+    "first_difference": null
+  },
+  "success": true,
+  "scope": "entire_board_synthesized_PCM_vs_fixed_reference"
+}

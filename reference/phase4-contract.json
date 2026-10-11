@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "scope": "zybo_board_offline",
+  "part": "xc7z010clg400-1",
+  "entry": "verification/phase-03/summary.json",
+  "clock": {
+    "core_hz": 100000000,
+    "board_hz": 125000000,
+    "sample_rate": 32000,
+    "frame_cycles": 3125,
+    "mmcm_divclk": 8,
+    "mmcm_mult_eighths": 313,
+    "mmcm_out_div_eighths": 398,
+    "mclk_target_hz": 12288000,
+    "mclk_per_frame": 384,
+    "mclk_per_bclk": 6,
+    "bclk_per_frame": 64,
+    "clock_tolerance_ppm": 1,
+    "cadence": "audio frame boundary crosses to core through a toggle synchronizer; due-to-commit includes configuration and admission; no independent free-running producer clock"
+  },
+  "codec": {
+    "i2c_address": 26,
+    "i2c_hz": 100000,
+    "format": "I2S slave, signed16 MSB first, 32-bit slots, left when LRCLK=0; one BCLK delay after LRCLK edge",
+    "native_bits": 24,
+    "wire_bits": 16,
+    "conversion": "signed24 arithmetic shift right 8, no gain, dither, resampling or channel swap",
+    "setup": [
+      [
+        15,
+        0
+      ],
+      [
+        6,
+        119
+      ],
+      [
+        0,
+        151
+      ],
+      [
+        1,
+        151
+      ],
+      [
+        2,
+        121
+      ],
+      [
+        3,
+        121
+      ],
+      [
+        4,
+        16
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        7,
+        2
+      ],
+      [
+        8,
+        24
+      ]
+    ],
+    "vmid_wait_us": 75000,
+    "activate": [
+      [
+        9,
+        1
+      ],
+      [
+        6,
+        103
+      ]
+    ],
+    "mute": "hardware MUTE low until clocks locked, codec configured and complete frame available; sticky transport/deadline/underrun fault mutes; explicit reset required"
+  },
+  "pins": {
+    "clk125": "L16",
+    "ac_mclk": "T19",
+    "i2s_bclk": "K18",
+    "i2s_lrclk": "L17",
+    "i2s_data": "M17",
+    "ac_mute_n": "P18",
+    "IIC_0_scl_io": "N18",
+    "IIC_0_sda_io": "N17",
+    "led[0]": "M14",
+    "led[1]": "M15",
+    "led[2]": "G14",
+    "led[3]": "D18"
+  },
+  "memory": {
+    "elf": {
+      "base": 1048576,
+      "bytes": 15728640
+    },
+    "commands": {
+      "base": 33554432,
+      "bytes": 33554432
+    },
+    "results0": {
+      "base": 100663296,
+      "bytes": 65536
+    },
+    "results1": {
+      "base": 100728832,
+      "bytes": 65536
+    },
+    "capture": {
+      "base": 134217728,
+      "bytes": 8388608
+    },
+    "wave": {
+      "base": 268435456,
+      "bytes": 20971520
+    }
+  },
+  "bus": {
+    "control_base": 1136656384,
+    "control_bytes": 4096,
+    "control": "PS M_AXI_GP0 to AXI4-Lite 32-bit; independent AW/W acceptance; stable read/write responses under backpressure",
+    "wave": "64-bit HP0 read-only AXI3 subset, four 32-byte outstanding lines, IDs/RLAST/RRESP checked",
+    "blocks": "64-bit HP1 command read and result write DMA; aligned INCR bursts never cross 4KiB; ordered responses and length checks; two descriptor slots with explicit ownership",
+    "burst_beats_max": 16,
+    "block_frames": 16,
+    "result_records_per_frame": 320,
+    "cache": "PS flushes initialized ROM and command blocks before ownership transfer; dsb precedes descriptor doorbell; invalidates completed result buffer before reading; buffers and lengths cache-line aligned",
+    "interrupt": "level interrupt for completed block or sticky fault, W1C acknowledgement; no per-sample CPU interrupt"
+  },
+  "frames": {
+    "voices": 64,
+    "input": "initial state once and explicit external control events with native frame order; golden post-state never supplied as commands",
+    "output": "all four sends and 64 mixer cells retained in original order; selected signed24 mixer cells drive left/right diagnostic audio; complete XP DSP/LSP and full final stereo remain Phase 5",
+    "pause": "pause only at complete frame boundary, output silence while paused, resume preserves source frame order",
+    "reset": "assert mute, stop new DMA descriptors, drain accepted AXI, then clear core/CDC/FIFO/state and counters before ready",
+    "deadline": "3125 core clocks from due request to commit including frame configuration; missing command, FIFO full, invalid command or DMA error stops and reports fault"
+  },
+  "midi": {
+    "source": "private/midi/th06-demo/midi",
+    "songs": [
+      "th06_01.mid",
+      "th06_02.mid",
+      "th06_03.mid",
+      "th06_04.mid",
+      "th06_05.mid",
+      "th06_06.mid",
+      "th06_07.mid"
+    ],
+    "input_unmodified": true,
+    "phase4": "real Touhou MIDI diagnostic windows with original frame indices, independent Voice evolution and address-indexed private Wave ROM",
+    "final": "all seven complete MIDI timelines, effects and 8-second tails; synthetic cases or piano cannot replace Touhou playback"
+  },
+  "observations": [
+    "frame_id",
+    "native_left_right_signed24",
+    "mixer_send_and_cell_stream",
+    "ROM_AR_address",
+    "ROM_R_data_response_last",
+    "FIFO_level",
+    "underrun",
+    "deadline_cycles",
+    "mute",
+    "DMA_descriptor_ownership",
+    "I2S_slots"
+  ],
+  "offline_required": [
+    "contract_and_negative_mutations",
+    "AXI_Lite_independent_channels_and_backpressure",
+    "DMA_4KiB_bursts_ownership_errors_and_cache_tests",
+    "I2S_bit_order_LRCLK_one_bit_delay_and_signed24_to16",
+    "CDC_reset_pause_resume_underflow_and_mute",
+    "board_ROM_frame_stream_and_golden_comparison",
+    "real_piano_ROM_addressed_synthesis",
+    "real_Touhou_MIDI_controls_ROM_and_I2S_window",
+    "codec_register_sequence_and_failure_stop",
+    "independent_bit_XSA_ELF_JTAG_outputs",
+    "full_device_resource_STA_DRC_CDC",
+    "phase0_phase1_phase2_phase3_cumulative",
+    "offline_delivery_audit"
+  ],
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "sources": {
+    "codec": "https://www.analog.com/media/en/technical-documentation/data-sheets/ssm2603.pdf",
+    "pins": "https://github.com/Digilent/digilent-xdc/blob/master/Zybo-Master.xdc",
+    "ps7": "https://github.com/Digilent/vivado-boards/blob/master/new/board_files/zybo/B.3/preset.xml",
+    "local_ps7": "hardware/board/zybo_ps7.tcl",
+    "reuse": "board configuration and tool methods only; no OPNA RTL, bitstream, XSA, BSP or ELF dependency"
+  },
+  "resources": {
+    "LUT": 17600,
+    "FF": 35200,
+    "DSP": 80,
+    "BRAM18": 120
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "schema_version": 2,
+  "phase": 3,
+  "status": "通过",
+  "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+  "gate_status": {
+    "A": "通过",
+    "B": "通过",
+    "C": "通过",
+    "D": "通过"
+  },
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "resources": {
+    "LUT": 11863,
+    "FF": 8529,
+    "BRAM36": 12,
+    "BRAM18": 8,
+    "DSP": 5,
+    "WNS_ns": 0.014,
+    "WHS_ns": 0.098,
+    "WPWS_ns": 3.75
+  },
+  "timing": {
+    "WNS_ns": 0.014,
+    "WHS_ns": 0.098,
+    "WPWS_ns": 3.75
+  },
+  "worst_cycles": 3117,
+  "reference": {
+    "cases": 48,
+    "frames": 6144,
+    "voice_frames": 161280,
+    "sends": 645120,
+    "rom_reads": 724280,
+    "mix_cells": 393216,
+    "mixer_distinguishing_cases": [
+      "negative_truncation",
+      "per_deposit_saturation",
+      "prior_frame_output",
+      "unreferenced_retention",
+      "zero_send_clears"
+    ],
+    "hooks": 164010,
+    "sparse_packets": 11760,
+    "configs": 72240,
+    "normalized_bytes": 968352,
+    "largest_frame_bytes": 3616,
+    "repeat_csv_files": 385,
+    "format_negatives": [
+      "magic",
+      "frame",
+      "length",
+      "word_count",
+      "config_count",
+      "packet_count",
+      "flags",
+      "cfg_reserved",
+      "cfg_width",
+      "cfg_opcode",
+      "packet_reserved",
+      "packet_stage",
+      "packet_value_width",
+      "odd_padding",
+      "alignment_padding",
+      "duplicate",
+      "stage_mask",
+      "terminal_reason",
+      "local_hold",
+      "empty_packet"
+    ]
+  },
+  "parameter_peaks": {
+    "success": true,
+    "scope": "actual_peak_PC_packet_transport",
+    "hardware_verified": false,
+    "seven_songs_rescanned": true,
+    "sources": [
+      {
+        "kind": "frame",
+        "case": "th06_07",
+        "first_frame": 432897,
+        "last_frame": 432897,
+        "original_peak_bytes": 2322,
+        "normalized_PC_bytes": 512,
+        "packets": 30,
+        "PS_host_events": 54
+      },
+      {
+        "kind": "window16",
+        "case": "th06_01",
+        "first_frame": 704,
+        "last_frame": 719,
+        "original_peak_bytes": 21174,
+        "normalized_PC_bytes": 512,
+        "packets": 0,
+        "PS_host_events": 770
+      },
+      {
+        "kind": "block",
+        "case": "th06_01",
+        "first_frame": 512,
+        "last_frame": 767,
+        "original_peak_bytes": 262568,
+        "normalized_PC_bytes": 8192,
+        "packets": 0,
+        "PS_host_events": 9496
+      }
+    ],
+    "limit": "PC packet transport fixtures. Real host effects are PS-owned; integrated synthetic tests separately include up to 320 genuine configuration words per frame. No source/PCM assertions are normalized."
+  },
+  "levels": {
+    "1": {
+      "numerical": {
+        "success": true,
+        "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+        "voices": 1,
+        "periodic": false,
+        "hardware_verified": false,
+        "DMA_traffic": {
+          "parameter_reads": 1915,
+          "wave_reads": 78,
+          "contentions": 0
+        },
+        "cases": 12,
+        "frames": 1536,
+        "rom_reads": 6930,
+        "records": 104448,
+        "commands": 1536,
+        "worst_cycles": 86,
+        "limit": "Simulation evidence; PS/DDR hardware latency and board timing remain unverified"
+      },
+      "implementation": {
+        "success": true,
+        "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+        "voices": 1,
+        "hardware_verified": false,
+        "limit": "Internal registered paths; external PS/DDR and board timing require hardware validation",
+        "core": {
+          "LUT": 11837,
+          "FF": 8533,
+          "BRAM36": 12,
+          "BRAM18": 8,
+          "DSP": 5,
+          "WNS_ns": 0.046,
+          "WHS_ns": 0.098,
+          "WPWS_ns": 3.75
+        }
+      }
+    },
+    "8": {
+      "numerical": {
+        "success": true,
+        "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+        "voices": 8,
+        "periodic": false,
+        "hardware_verified": false,
+        "DMA_traffic": {
+          "parameter_reads": 3362,
+          "wave_reads": 666,
+          "contentions": 0
+        },
+        "cases": 12,
+        "frames": 1536,
+        "rom_reads": 55194,
+        "records": 147456,
+        "commands": 11264,
+        "worst_cycles": 397,
+        "limit": "Simulation evidence; PS/DDR hardware latency and board timing remain unverified"
+      },
+      "implementation": {
+        "success": true,
+        "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+        "voices": 8,
+        "hardware_verified": false,
+        "limit": "Internal registered paths; external PS/DDR and board timing require hardware validation",
+        "core": {
+          "LUT": 11756,
+          "FF": 8513,
+          "BRAM36": 12,
+          "BRAM18": 8,
+          "DSP": 5,
+          "WNS_ns": 0.028,
+          "WHS_ns": 0.098,
+          "WPWS_ns": 3.75
+        }
+      }
+    },
+    "32": {
+      "numerical": {
+        "success": true,
+        "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+        "voices": 32,
+        "periodic": false,
+        "hardware_verified": false,
+        "DMA_traffic": {
+          "parameter_reads": 8840,
+          "wave_reads": 2665,
+          "contentions": 0
+        },
+        "cases": 12,
+        "frames": 1536,
+        "rom_reads": 220728,
+        "records": 294912,
+        "commands": 45056,
+        "worst_cycles": 1549,
+        "limit": "Simulation evidence; PS/DDR hardware latency and board timing remain unverified"
+      },
+      "implementation": {
+        "success": true,
+        "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+        "voices": 32,
+        "hardware_verified": false,
+        "limit": "Internal registered paths; external PS/DDR and board timing require hardware validation",
+        "core": {
+          "LUT": 11788,
+          "FF": 8526,
+          "BRAM36": 12,
+          "BRAM18": 8,
+          "DSP": 5,
+          "WNS_ns": 0.006,
+          "WHS_ns": 0.113,
+          "WPWS_ns": 3.75
+        }
+      }
+    },
+    "64": {
+      "numerical": {
+        "success": true,
+        "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+        "voices": 64,
+        "periodic": false,
+        "hardware_verified": false,
+        "DMA_traffic": {
+          "parameter_reads": 16144,
+          "wave_reads": 5340,
+          "contentions": 0
+        },
+        "cases": 12,
+        "frames": 1536,
+        "rom_reads": 441428,
+        "records": 491520,
+        "commands": 90112,
+        "worst_cycles": 3085,
+        "limit": "Simulation evidence; PS/DDR hardware latency and board timing remain unverified"
+      },
+      "implementation": {
+        "success": true,
+        "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+        "voices": 64,
+        "hardware_verified": false,
+        "limit": "Internal registered paths; external PS/DDR and board timing require hardware validation",
+        "core": {
+          "LUT": 11863,
+          "FF": 8529,
+          "BRAM36": 12,
+          "BRAM18": 8,
+          "DSP": 5,
+          "WNS_ns": 0.014,
+          "WHS_ns": 0.098,
+          "WPWS_ns": 3.75
+        }
+      }
+    }
+  },
+  "continuous_pressure": {
+    "success": true,
+    "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+    "voices": 64,
+    "periodic": true,
+    "hardware_verified": false,
+    "DMA_traffic": {
+      "parameter_reads": 16144,
+      "wave_reads": 5340,
+      "contentions": 2136
+    },
+    "stress": {
+      "latency": {
+        "worst_cycles": 3113,
+        "ar_stall_max": 7,
+        "first_r_max": 32,
+        "interbeat_gap_max": 0,
+        "output_stalls": 12288,
+        "DMA_traffic": {
+          "parameter_reads": 16144,
+          "wave_reads": 5340,
+          "contentions": 8271
+        }
+      },
+      "gaps": {
+        "worst_cycles": 3091,
+        "ar_stall_max": 7,
+        "first_r_max": 21,
+        "interbeat_gap_max": 3,
+        "output_stalls": 12288,
+        "DMA_traffic": {
+          "parameter_reads": 16144,
+          "wave_reads": 5340,
+          "contentions": 4942
+        }
+      },
+      "mixed": {
+        "worst_cycles": 3117,
+        "ar_stall_max": 7,
+        "first_r_max": 32,
+        "interbeat_gap_max": 3,
+        "output_stalls": 12288,
+        "DMA_traffic": {
+          "parameter_reads": 16144,
+          "wave_reads": 5340,
+          "contentions": 10258
+        }
+      }
+    },
+    "lifecycle": {
+      "full_fifo_frames": 2,
+      "admission_deadline": 3126,
+      "reset_positions": 14,
+      "parameter_reset_positions": 6,
+      "fresh_frames": 14,
+      "underrun": 1,
+      "timeout_drain": true
+    },
+    "negative_tests": [
+      "missing_voice",
+      "wrong_address",
+      "one_cycle_overrun",
+      "parameter_coefficient",
+      "missing_parameters",
+      "late_parameters"
+    ],
+    "cases": 12,
+    "frames": 1536,
+    "rom_reads": 441428,
+    "records": 491520,
+    "commands": 90112,
+    "worst_cycles": 3085,
+    "limit": "Simulation evidence; PS/DDR hardware latency and board timing remain unverified"
+  }
+}

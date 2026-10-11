@@ -1,0 +1,1130 @@
+{
+  "version": 1,
+  "field_schema_version": 1,
+  "phase": 1,
+  "scope": "offline_parameter_player_software",
+  "sample_rate": 32000,
+  "boot_frames": 256000,
+  "case_frames": 256000,
+  "song_tail_frames": 256000,
+  "byte_order": "little-endian",
+  "header_bytes": 104,
+  "header_struct": "<8sIIQQQQ40sIIII",
+  "header_fields": [
+    "magic SC88PAR1",
+    "version",
+    "sample_rate",
+    "boot_frames",
+    "case_frames",
+    "tail_frames",
+    "total_frames",
+    "commit ASCII40",
+    "rom_layout=1",
+    "field_schema=1",
+    "segment_index",
+    "first_block_index"
+  ],
+  "record_bytes": 24,
+  "record_struct": "<QIBBBBII",
+  "record_fields": [
+    "absolute_frame u64",
+    "sequence u32",
+    "kind u8",
+    "stage u8",
+    "target u8",
+    "voice u8",
+    "field_mask u32",
+    "payload_bytes u32"
+  ],
+  "block_bytes": 32,
+  "block_struct": "<4sIQQII",
+  "block_fields": [
+    "magic PBL1",
+    "block_index u32",
+    "first_frame u64",
+    "last_frame u64",
+    "payload_bytes u32",
+    "record_count u32"
+  ],
+  "block_frames": 256,
+  "max_block_payload": 8388608,
+  "filesystem": "FAT32",
+  "max_segment_bytes": 4294967295,
+  "segment_rule": "song.scp then song.001.scp etc; split only before complete logical blocks; repeated identity and continuous segment/block/frame/sequence; final segment alone contains END",
+  "kinds": {
+    "RESET": 1,
+    "WRITE8": 2,
+    "READ8": 3,
+    "RETURN_GATE": 4,
+    "FRAME": 5,
+    "CONTROL_DELTA": 6,
+    "TERMINAL_CANDIDATE": 7,
+    "END": 8
+  },
+  "stages": {
+    "HOST": 0,
+    "INITIALIZE_CONTROL": 1,
+    "STARTING_CONTROL": 2,
+    "POST_SOURCE_REFRESH": 3,
+    "RAMP_SERVICE": 4
+  },
+  "targets": {
+    "board": 0,
+    "XP": 1,
+    "LSP": 2
+  },
+  "voice_sentinel": 255,
+  "fields": [
+    {
+      "bit": 0,
+      "name": "pitchIncrement_0d00",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "bit": 1,
+      "name": "tvfQDestination_1100",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 2,
+      "name": "pitchDestination_1200",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 3,
+      "name": "tvfFDestination_1300",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 4,
+      "name": "ampModDestination_1400",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 5,
+      "name": "ampDestination_1500",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 6,
+      "name": "tvfQRamp_1600",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 131072,
+      "stages": []
+    },
+    {
+      "bit": 7,
+      "name": "pitchRamp_1700",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 131072,
+      "stages": []
+    },
+    {
+      "bit": 8,
+      "name": "tvfFRamp_1800",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 131072,
+      "stages": []
+    },
+    {
+      "bit": 9,
+      "name": "ampModRamp_1900",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 131072,
+      "stages": []
+    },
+    {
+      "bit": 10,
+      "name": "ampRamp_1a00",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 131072,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 11,
+      "name": "pitchCurrent_1b00",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        1,
+        4
+      ]
+    },
+    {
+      "bit": 12,
+      "name": "tvfFCurrent_1c00",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        1,
+        2,
+        4
+      ]
+    },
+    {
+      "bit": 13,
+      "name": "ampModCurrent_1d00",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 14,
+      "name": "ampCurrent_1e00",
+      "width": 18,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        1,
+        4
+      ]
+    },
+    {
+      "bit": 15,
+      "name": "tvfQCurrent_2100",
+      "width": 20,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 16,
+      "name": "tvfFCoefficient_2200",
+      "width": 20,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "bit": 17,
+      "name": "combinedAmp_2300",
+      "width": 20,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 18,
+      "name": "pitchStep_2400",
+      "width": 20,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 19,
+      "name": "tvfFStep_2500",
+      "width": 20,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 20,
+      "name": "ampStep_2600",
+      "width": 20,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    },
+    {
+      "bit": 21,
+      "name": "runtimeCache.ampCurve2EntryPending",
+      "width": 1,
+      "transport": "u32 little-endian",
+      "owner": "PC",
+      "initial": 0,
+      "local_preserved_mask": 0,
+      "stages": [
+        4
+      ]
+    }
+  ],
+  "stage_masks": {
+    "1": 88065,
+    "2": 4096,
+    "3": 65537,
+    "4": 4193343
+  },
+  "cold_start": "Fixed factory-reset final powerCycle; first executable event RESET, no H8/Control ROM/state import; boot/native/tail endpoints absolute",
+  "schedule": "All H8 accesses precede XP step. Mixer consumes previous output; TVA consumes incoming combinedAmp. Initialize/start control hooks remain in source launch phases. Running refresh is after interpolation/phase/refill before Ramp service. Ramp computed delta precedes local terminal arbitration. FRAME closes one complete XP/DSP/LSP frame; LSP SDIA return is consumed next frame.",
+  "local_IRQ": "Original Mute -> Loop -> terminal ordering, accepted/blocked/mask/status and wave marker stages remain runtime-local. Ramp hold is excluded from computed deltas and set only by actual host writes/local accepted terminal. Candidate events encode precomputed control triggers, not golden acceptance/status.",
+  "assertions": "assertions.bin SC88AST1: read results and initial/every32768/final named XP/LSP state words; optional external comparison only, never injected. Parameter replay can run with no assertion file.",
+  "forbidden_runtime_inputs": [
+    "PCM",
+    "addressFraction after-state",
+    "sampleCurrent after-state",
+    "waveFetch/FIFO after-state",
+    "DPCM accumulator after-state",
+    "TVA gain after-state",
+    "filter BP/LP/output after-state",
+    "XP DSP/LSP histories after-state",
+    "golden IRQ accepted/status/mute/loop/hold post-state"
+  ],
+  "cases": [
+    {
+      "id": "silence",
+      "expect": "constant_dc",
+      "dc": 32,
+      "events": []
+    },
+    {
+      "id": "piano",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            0
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            100
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "velocity_low",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            0
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            1
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "velocity_high",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            0
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            127
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "pitch",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            80
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            100
+          ]
+        ],
+        [
+          19200,
+          0,
+          [
+            224,
+            0,
+            0
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            224,
+            127,
+            127
+          ]
+        ],
+        [
+          51200,
+          0,
+          [
+            224,
+            0,
+            64
+          ]
+        ],
+        [
+          67200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "loop_sustain",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            80
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            100
+          ]
+        ],
+        [
+          131200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "filter_envelope",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            81
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            48,
+            100
+          ]
+        ],
+        [
+          19200,
+          0,
+          [
+            176,
+            11,
+            32
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            176,
+            11,
+            127
+          ]
+        ],
+        [
+          51200,
+          0,
+          [
+            128,
+            48,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "drums",
+      "expect": "active",
+      "events": [
+        [
+          3200,
+          0,
+          [
+            153,
+            36,
+            100
+          ]
+        ],
+        [
+          19200,
+          0,
+          [
+            153,
+            38,
+            100
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            153,
+            42,
+            100
+          ]
+        ],
+        [
+          51200,
+          0,
+          [
+            153,
+            49,
+            100
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "effects_dry",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            176,
+            91,
+            0
+          ]
+        ],
+        [
+          0,
+          0,
+          [
+            176,
+            93,
+            0
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            100
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "effects_wet",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            176,
+            91,
+            127
+          ]
+        ],
+        [
+          0,
+          0,
+          [
+            176,
+            93,
+            127
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            100
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "short_midi",
+      "expect": "active",
+      "smf": true,
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            0
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            100
+          ]
+        ],
+        [
+          19200,
+          0,
+          [
+            144,
+            64,
+            80
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            144,
+            67,
+            120
+          ]
+        ],
+        [
+          51200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ],
+        [
+          51200,
+          0,
+          [
+            128,
+            64,
+            0
+          ]
+        ],
+        [
+          51200,
+          0,
+          [
+            128,
+            67,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "multi_same_frame",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            0
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            48,
+            100
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            90
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            67,
+            110
+          ]
+        ],
+        [
+          19200,
+          0,
+          [
+            176,
+            64,
+            127
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            128,
+            48,
+            0
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            128,
+            67,
+            0
+          ]
+        ],
+        [
+          67200,
+          0,
+          [
+            176,
+            64,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "program_switch",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            0
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            100
+          ]
+        ],
+        [
+          19200,
+          0,
+          [
+            192,
+            80
+          ]
+        ],
+        [
+          19200,
+          0,
+          [
+            144,
+            67,
+            100
+          ]
+        ],
+        [
+          51200,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ],
+        [
+          67200,
+          0,
+          [
+            128,
+            67,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "gs_reset",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            192,
+            80
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            144,
+            60,
+            100
+          ]
+        ],
+        [
+          19200,
+          0,
+          [
+            240,
+            65,
+            16,
+            66,
+            18,
+            64,
+            0,
+            127,
+            0,
+            65,
+            247
+          ]
+        ],
+        [
+          35200,
+          0,
+          [
+            192,
+            0
+          ]
+        ],
+        [
+          51200,
+          0,
+          [
+            144,
+            67,
+            100
+          ]
+        ],
+        [
+          83200,
+          0,
+          [
+            128,
+            67,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "lsp_insert",
+      "expect": "active",
+      "events": [
+        [
+          0,
+          0,
+          [
+            240,
+            65,
+            16,
+            66,
+            18,
+            64,
+            65,
+            34,
+            1,
+            92,
+            247
+          ]
+        ],
+        [
+          1600,
+          0,
+          [
+            240,
+            65,
+            16,
+            66,
+            18,
+            64,
+            3,
+            0,
+            1,
+            17,
+            43,
+            247
+          ]
+        ],
+        [
+          3200,
+          0,
+          [
+            192,
+            80
+          ]
+        ],
+        [
+          9600,
+          0,
+          [
+            144,
+            60,
+            100
+          ]
+        ],
+        [
+          32000,
+          0,
+          [
+            240,
+            65,
+            16,
+            66,
+            18,
+            64,
+            3,
+            3,
+            127,
+            59,
+            247
+          ]
+        ],
+        [
+          64000,
+          0,
+          [
+            240,
+            65,
+            16,
+            66,
+            18,
+            64,
+            3,
+            0,
+            1,
+            35,
+            25,
+            247
+          ]
+        ],
+        [
+          96000,
+          0,
+          [
+            128,
+            60,
+            0
+          ]
+        ]
+      ],
+      "source": "Roland SC-88Pro Owner's Manual pp.93-94,196,199; https://cdn.roland.com/assets/media/pdf/SC-88PRO_OM.pdf"
+    }
+  ],
+  "songs": [
+    "th06_01.mid",
+    "th06_02.mid",
+    "th06_03.mid",
+    "th06_04.mid",
+    "th06_05.mid",
+    "th06_06.mid",
+    "th06_07.mid"
+  ],
+  "comparison": "same absolute frame and fixed integer samples/state; first difference fails; no shifts, gain fitting or tolerances",
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "terminal_candidate_rule": "Export only armed and currently unmasked terminal attempts. These predicates are identical to the original early return and have no side effects. Accepted/blocked IRQ arbitration stays local; masked/unarmed requests consume no event and do not change the runtime state."
+}

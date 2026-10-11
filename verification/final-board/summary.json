@@ -1,0 +1,15 @@
+{
+  "scope": "parameter_full_Zybo_PS_PL_with_ILAs",
+  "success": true,
+  "hardware_verified": false,
+  "device": {
+    "LUT": 15331,
+    "FF": 14925,
+    "BRAM36": 22,
+    "BRAM18": 10,
+    "DSP": 7,
+    "WNS_ns": 0.201,
+    "WHS_ns": 0.025,
+    "WPWS_ns": 2.0
+  }
+}

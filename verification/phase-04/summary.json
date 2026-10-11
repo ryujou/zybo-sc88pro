@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "phase": 4,
+  "status": "进行中",
+  "scope": "zybo_board_offline",
+  "offline_status": "进行中",
+  "gate_status": {
+    "A": "通过",
+    "B": "未开始",
+    "C": "未开始",
+    "D": "未开始"
+  },
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "clock_plan": {
+    "mclk_hz": 12288002.512562813,
+    "sample_hz": 32000.006543132327,
+    "error_ppm": 0.20447288529013008
+  }
+}

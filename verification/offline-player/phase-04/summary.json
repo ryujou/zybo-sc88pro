@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "phase": 4,
+  "scope": "offline_parameter_board",
+  "status": "进行中",
+  "gate_status": {
+    "A": "通过",
+    "B": "未开始",
+    "C": "未开始",
+    "D": "未开始"
+  },
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE"
+}

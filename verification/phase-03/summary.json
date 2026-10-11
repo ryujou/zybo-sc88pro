@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "phase": 3,
+  "status": "未通过",
+  "scope": "multi_voice_rtl",
+  "gate_status": {
+    "A": "通过",
+    "B": "未通过",
+    "C": "未开始",
+    "D": "未开始"
+  },
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "resources": "UNVERIFIED",
+  "timing": "UNVERIFIED",
+  "worst_cycles": "UNVERIFIED",
+  "reference": {
+    "cases": 48,
+    "frames": 6144,
+    "voice_frames": 161280,
+    "sends": 645120,
+    "rom_reads": 724280,
+    "mix_cells": 393216,
+    "mixer_distinguishing_cases": [
+      "negative_truncation",
+      "per_deposit_saturation",
+      "prior_frame_output",
+      "unreferenced_retention",
+      "zero_send_clears"
+    ],
+    "repeat_csv_files": 337
+  },
+  "levels": {
+    "1": {
+      "numeric": {
+        "success": true,
+        "scope": "continuous_multivoice_DDR_mixer",
+        "voices": 1,
+        "periodic": false,
+        "hardware_verified": false,
+        "cases": 12,
+        "frames": 1536,
+        "rom_reads": 6930,
+        "records": 104448,
+        "commands": 1536,
+        "worst_cycles": 79,
+        "limit": "Simulation evidence; PS/DDR hardware latency and board timing remain unverified"
+      },
+      "implementation": {
+        "success": true,
+        "scope": "integrated_scheduler_cache_AXI_mixer_OOC",
+        "voices": 1,
+        "hardware_verified": false,
+        "limit": "Internal registered paths; external PS/DDR and board timing require hardware validation",
+        "core": {
+          "LUT": 12349,
+          "FF": 8072,
+          "BRAM36": 3,
+          "BRAM18": 10,
+          "DSP": 12,
+          "WNS_ns": 0.033,
+          "WHS_ns": 0.127,
+          "WPWS_ns": 3.75
+        }
+      }
+    },
+    "8": {
+      "numeric": {
+        "success": true,
+        "scope": "continuous_multivoice_DDR_mixer",
+        "voices": 8,
+        "periodic": false,
+        "hardware_verified": false,
+        "cases": 12,
+        "frames": 1536,
+        "rom_reads": 55194,
+        "records": 147456,
+        "commands": 11264,
+        "worst_cycles": 389,
+        "limit": "Simulation evidence; PS/DDR hardware latency and board timing remain unverified"
+      },
+      "implementation": {
+        "success": true,
+        "scope": "integrated_scheduler_cache_AXI_mixer_OOC",
+        "voices": 8,
+        "hardware_verified": false,
+        "limit": "Internal registered paths; external PS/DDR and board timing require hardware validation",
+        "core": {
+          "LUT": 12363,
+          "FF": 8071,
+          "BRAM36": 3,
+          "BRAM18": 10,
+          "DSP": 12,
+          "WNS_ns": 0.068,
+          "WHS_ns": 0.117,
+          "WPWS_ns": 3.75
+        }
+      }
+    }
+  }
+}

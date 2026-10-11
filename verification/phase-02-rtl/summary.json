@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "phase": 2,
+  "status": "通过",
+  "scope": "single_voice_rtl",
+  "gate_status": {
+    "A": "通过",
+    "B": "通过",
+    "C": "通过",
+    "D": "通过"
+  },
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "resources": {
+    "LUT": 8259,
+    "FF": 5371,
+    "DSP": 10,
+    "BRAM18": 10,
+    "BRAM36": 0
+  },
+  "timing": {
+    "WNS_ns": 0.059,
+    "WHS_ns": 0.126,
+    "WPWS_ns": 4.5
+  },
+  "worst_cycles": {
+    "single": 44,
+    "pair": 88,
+    "scope": "synthetic_real_piano_and_endpoint_pressure_nominal_rom"
+  },
+  "state_words": 51,
+  "golden_cases": 60,
+  "golden_frames": 15360,
+  "trace_frames": 256000,
+  "contract_negative_tests": 6
+}

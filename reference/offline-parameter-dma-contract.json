@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+  "magic": "SC88DMA1",
+  "byte_order": "little",
+  "frame_header": {
+    "bytes": 32,
+    "layout": "<8sQIIHHI",
+    "fields": [
+      "magic",
+      "frame_u64",
+      "total_bytes_u32",
+      "payload_words_u32",
+      "cfg_count_u16",
+      "packet_count_u16",
+      "flags_u32_zero"
+    ]
+  },
+  "alignment_bytes": 32,
+  "max_frame_bytes": 16384,
+  "frame_buffers": 2,
+  "packet_lookahead": 2,
+  "config": {
+    "opcode": 1,
+    "fields": {
+      "opcode": [
+        63,
+        60
+      ],
+      "voice": [
+        59,
+        54
+      ],
+      "word": [
+        53,
+        48
+      ],
+      "reserved_zero": [
+        47,
+        32
+      ],
+      "value": [
+        31,
+        0
+      ]
+    },
+    "source": "Genuine external host effects only; all 51 initial state words may be loaded once. Dynamic source/FIFO/filter/PCM assertion state is never translated to cfg."
+  },
+  "packet": {
+    "opcode": 2,
+    "fields": {
+      "opcode": [
+        63,
+        60
+      ],
+      "voice": [
+        59,
+        54
+      ],
+      "stage": [
+        53,
+        51
+      ],
+      "terminal_valid": [
+        50,
+        50
+      ],
+      "terminal_reason": [
+        49,
+        47
+      ],
+      "mask": [
+        46,
+        25
+      ],
+      "reserved_zero": [
+        24,
+        0
+      ]
+    },
+    "values": "Selected 22 PC fields only, u32 in increasing mask-bit order; two lanes per u64, odd upper lane zero.",
+    "order": "Strictly increasing (voice,stage), at most one packet per hook; pure no-op hooks omitted. A validated later packet or payload exhaustion supplies zero-mask no-terminal to the actual requested hook; stale or unconsumed packet faults.",
+    "validation": "All header/count/length/padding/word-width/PC-mask/hold/stage/terminal checks; DMA error faults. No successful affected frame publication."
+  },
+  "ownership": "Prefetched bytes never advance voice state. Configuration is applied from audio due before ascending voice issue. Hook packets are consumed only by current xp3_parameter_voice request.",
+  "reset": "Clear ownership, drain shared accepted bursts, then reuse raw RAM. No raw RAM clear is required.",
+  "parameter_contract": "reference/offline-parameter-contract.json",
+  "state_contract": "reference/phase2-rtl-contract.json",
+  "bus": {
+    "shared_with_wave": true,
+    "data_bits": 64,
+    "beats": 4,
+    "burst_bytes": 32,
+    "outstanding_total": 4,
+    "id": 0,
+    "local_tag_bits": 11,
+    "parameter_class_bit": 10,
+    "buffer_bit": 9,
+    "line_row_bits": [
+      8,
+      0
+    ]
+  }
+}

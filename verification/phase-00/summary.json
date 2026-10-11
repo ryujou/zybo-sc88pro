@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "phase": 0,
+  "status": "通过",
+  "scope": "software",
+  "commit": "9af8bb05bcef2994b5dbb60c5c028e978a72aecb",
+  "sample_rate": 32000,
+  "valid_bits": 24,
+  "raw_container_bits": 32,
+  "cases": [
+    {
+      "case": "silence",
+      "peak": 32,
+      "dynamic_samples": 0,
+      "first_signal_frame": null
+    },
+    {
+      "case": "piano",
+      "peak": 398615,
+      "dynamic_samples": 503082,
+      "first_signal_frame": 3260
+    },
+    {
+      "case": "velocity_low",
+      "peak": 3839,
+      "dynamic_samples": 505210,
+      "first_signal_frame": 3265
+    },
+    {
+      "case": "velocity_high",
+      "peak": 659303,
+      "dynamic_samples": 503008,
+      "first_signal_frame": 3258
+    },
+    {
+      "case": "pitch",
+      "peak": 313670,
+      "dynamic_samples": 505253,
+      "first_signal_frame": 3296
+    },
+    {
+      "case": "loop_sustain",
+      "peak": 313670,
+      "dynamic_samples": 505105,
+      "first_signal_frame": 3296
+    },
+    {
+      "case": "filter_envelope",
+      "peak": 720444,
+      "dynamic_samples": 505279,
+      "first_signal_frame": 3296
+    },
+    {
+      "case": "drums",
+      "peak": 928277,
+      "dynamic_samples": 308155,
+      "first_signal_frame": 3257
+    },
+    {
+      "case": "effects_dry",
+      "peak": 398615,
+      "dynamic_samples": 92334,
+      "first_signal_frame": 3259
+    },
+    {
+      "case": "effects_wet",
+      "peak": 417391,
+      "dynamic_samples": 505324,
+      "first_signal_frame": 3259
+    },
+    {
+      "case": "short_midi",
+      "peak": 593017,
+      "dynamic_samples": 500558,
+      "first_signal_frame": 3260
+    }
+  ],
+  "repeat_pcm_frames": 2816000,
+  "repeat_boot_frames": 2816000,
+  "max_absolute_error": 0,
+  "rms_error": 0,
+  "silence_dc": [
+    32,
+    32
+  ],
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "hls_resources": "N/A",
+  "fpga_resources": "N/A",
+  "golden_reference_only": true
+}

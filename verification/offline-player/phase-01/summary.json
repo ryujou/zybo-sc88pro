@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "phase": 1,
+  "status": "通过",
+  "scope": "offline_parameter_player_software",
+  "format_version": 1,
+  "field_schema_version": 1,
+  "commit": "9af8bb05bcef2994b5dbb60c5c028e978a72aecb",
+  "sample_rate": 32000,
+  "case_count": 15,
+  "song_count": 7,
+  "boundary_case_count": 22,
+  "boot_frames_compared": 5632000,
+  "native_frames_compared": 25523583,
+  "state_checkpoints": 981,
+  "max_absolute_error": 0,
+  "rms_error": 0,
+  "cpu_instructions_in_replay": 0,
+  "control_implementations_executed": 0,
+  "control_rom_loaded_by_replay": false,
+  "golden_post_state_runtime_input": false,
+  "negative_tests": [
+    {
+      "name": "changed_valid_TVF_coefficient",
+      "rejected": true
+    },
+    {
+      "name": "dropped_computed_control_delta",
+      "rejected": true
+    },
+    {
+      "name": "wrong_valid_consumption_stage",
+      "rejected": true
+    },
+    {
+      "name": "noncommuting_host_byte_order",
+      "rejected": true
+    },
+    {
+      "name": "duplicate_control_service_delta",
+      "rejected": true
+    },
+    {
+      "name": "wrong_absolute_frame",
+      "rejected": true
+    },
+    {
+      "name": "unknown_field_mask",
+      "rejected": true
+    },
+    {
+      "name": "field_width_overflow",
+      "rejected": true
+    },
+    {
+      "name": "wrong_control_target",
+      "rejected": true
+    },
+    {
+      "name": "voice_out_of_range",
+      "rejected": true
+    },
+    {
+      "name": "forbidden_golden_post_state_kind",
+      "rejected": true
+    },
+    {
+      "name": "missing_RESET",
+      "rejected": true
+    },
+    {
+      "name": "missing_END",
+      "rejected": true
+    },
+    {
+      "name": "truncated_logical_block",
+      "rejected": true
+    },
+    {
+      "name": "wrong_logical_block_length",
+      "rejected": true
+    },
+    {
+      "name": "trailing_record_bytes",
+      "rejected": true
+    },
+    {
+      "name": "changed_assertion_is_detected_not_injected",
+      "rejected": true
+    },
+    {
+      "name": "changed_read_result_assertion",
+      "rejected": true
+    },
+    {
+      "name": "positive_segmented_complete_block_replay",
+      "passed": true
+    },
+    {
+      "name": "missing_parameter_segment",
+      "rejected": true
+    },
+    {
+      "name": "wrong_segment_header",
+      "rejected": true
+    },
+    {
+      "name": "Wave_only_no_assertion_file_exact_replay",
+      "passed": true
+    },
+    {
+      "name": "PCM_first_sample_bit_change",
+      "rejected": true
+    },
+    {
+      "name": "empty_PCM",
+      "rejected": true
+    },
+    {
+      "name": "missing_final_PCM_frame",
+      "rejected": true
+    },
+    {
+      "name": "CLI_equal",
+      "passed": true
+    },
+    {
+      "name": "CLI_changed",
+      "passed": true
+    }
+  ],
+  "song_metrics": [
+    {
+      "file": "th06_01.mid",
+      "frames": 2345791,
+      "success": true,
+      "records": 11973869,
+      "event_bytes": 325402015,
+      "native_event_bytes": 318420652,
+      "native_average_event_bytes_per_second": 4875830.0,
+      "peak_frame_event_bytes": 2264,
+      "peak_frame_index": 1156097,
+      "peak_aligned_16_frame_event_bytes": 21174,
+      "peak_aligned_16_first_frame": 704,
+      "logical_blocks": 9164,
+      "largest_block_bytes": 262568,
+      "decoder_peak_buffer_capacity_bytes_x64": 338775,
+      "delta_events": 6765744,
+      "terminal_events": 568,
+      "decode_seconds_x64": 0.721891,
+      "decode_bytes_per_second_x64": 450763000.0,
+      "ARMv7": "UNVERIFIED",
+      "USB": "UNVERIFIED",
+      "segments": [
+        {
+          "file": "song.scp",
+          "bytes": 325695367
+        }
+      ],
+      "file_bytes": 325695367,
+      "tail_frames": 256000,
+      "file_buffer_candidate_each_bytes": [
+        8388608,
+        16777216
+      ],
+      "audio_block_frames": 16
+    },
+    {
+      "file": "th06_02.mid",
+      "frames": 3344607,
+      "success": true,
+      "records": 17867660,
+      "event_bytes": 488383732,
+      "native_event_bytes": 481402369,
+      "native_average_event_bytes_per_second": 4987650.0,
+      "peak_frame_event_bytes": 2180,
+      "peak_frame_index": 665601,
+      "peak_aligned_16_frame_event_bytes": 21174,
+      "peak_aligned_16_first_frame": 704,
+      "logical_blocks": 13065,
+      "largest_block_bytes": 262568,
+      "decoder_peak_buffer_capacity_bytes_x64": 338775,
+      "delta_events": 9753668,
+      "terminal_events": 2285,
+      "decode_seconds_x64": 1.08118,
+      "decode_bytes_per_second_x64": 451713000.0,
+      "ARMv7": "UNVERIFIED",
+      "USB": "UNVERIFIED",
+      "segments": [
+        {
+          "file": "song.scp",
+          "bytes": 488801916
+        }
+      ],
+      "file_bytes": 488801916,
+      "tail_frames": 256000,
+      "file_buffer_candidate_each_bytes": [
+        8388608,
+        16777216
+      ],
+      "audio_block_frames": 16
+    },
+    {
+      "file": "th06_03.mid",
+      "frames": 2349861,
+      "success": true,
+      "records": 10675732,
+      "event_bytes": 290336318,
+      "native_event_bytes": 283354955,
+      "native_average_event_bytes_per_second": 4330450.0,
+      "peak_frame_event_bytes": 2212,
+      "peak_frame_index": 1294273,
+      "peak_aligned_16_frame_event_bytes": 21174,
+      "peak_aligned_16_first_frame": 704,
+      "logical_blocks": 9180,
+      "largest_block_bytes": 262568,
+      "decoder_peak_buffer_capacity_bytes_x64": 338775,
+      "delta_events": 5286256,
+      "terminal_events": 1624,
+      "decode_seconds_x64": 0.651565,
+      "decode_bytes_per_second_x64": 445598000.0,
+      "ARMv7": "UNVERIFIED",
+      "USB": "UNVERIFIED",
+      "segments": [
+        {
+          "file": "song.scp",
+          "bytes": 290630182
+        }
+      ],
+      "file_bytes": 290630182,
+      "tail_frames": 256000,
+      "file_buffer_candidate_each_bytes": [
+        8388608,
+        16777216
+      ],
+      "audio_block_frames": 16
+    },
+    {
+      "file": "th06_04.mid",
+      "frames": 3331333,
+      "success": true,
+      "records": 17253901,
+      "event_bytes": 468979032,
+      "native_event_bytes": 461997669,
+      "native_average_event_bytes_per_second": 4807260.0,
+      "peak_frame_event_bytes": 2212,
+      "peak_frame_index": 1378305,
+      "peak_aligned_16_frame_event_bytes": 21174,
+      "peak_aligned_16_first_frame": 704,
+      "logical_blocks": 13014,
+      "largest_block_bytes": 262568,
+      "decoder_peak_buffer_capacity_bytes_x64": 338775,
+      "delta_events": 9437835,
+      "terminal_events": 1314,
+      "decode_seconds_x64": 1.06135,
+      "decode_bytes_per_second_x64": 441870000.0,
+      "ARMv7": "UNVERIFIED",
+      "USB": "UNVERIFIED",
+      "segments": [
+        {
+          "file": "song.scp",
+          "bytes": 469395584
+        }
+      ],
+      "file_bytes": 469395584,
+      "tail_frames": 256000,
+      "file_buffer_candidate_each_bytes": [
+        8388608,
+        16777216
+      ],
+      "audio_block_frames": 16
+    },
+    {
+      "file": "th06_05.mid",
+      "frames": 3496825,
+      "success": true,
+      "records": 18015434,
+      "event_bytes": 489338042,
+      "native_event_bytes": 482356679,
+      "native_average_event_bytes_per_second": 4762800.0,
+      "peak_frame_event_bytes": 2252,
+      "peak_frame_index": 1549057,
+      "peak_aligned_16_frame_event_bytes": 21174,
+      "peak_aligned_16_first_frame": 704,
+      "logical_blocks": 13660,
+      "largest_block_bytes": 262568,
+      "decoder_peak_buffer_capacity_bytes_x64": 338775,
+      "delta_events": 9539192,
+      "terminal_events": 2572,
+      "decode_seconds_x64": 1.04965,
+      "decode_bytes_per_second_x64": 466190000.0,
+      "ARMv7": "UNVERIFIED",
+      "USB": "UNVERIFIED",
+      "segments": [
+        {
+          "file": "song.scp",
+          "bytes": 489775266
+        }
+      ],
+      "file_bytes": 489775266,
+      "tail_frames": 256000,
+      "file_buffer_candidate_each_bytes": [
+        8388608,
+        16777216
+      ],
+      "audio_block_frames": 16
+    },
+    {
+      "file": "th06_06.mid",
+      "frames": 5008092,
+      "success": true,
+      "records": 31133425,
+      "event_bytes": 858512970,
+      "native_event_bytes": 851531607,
+      "native_average_event_bytes_per_second": 5734110.0,
+      "peak_frame_event_bytes": 2180,
+      "peak_frame_index": 1250049,
+      "peak_aligned_16_frame_event_bytes": 21174,
+      "peak_aligned_16_first_frame": 704,
+      "logical_blocks": 19563,
+      "largest_block_bytes": 262568,
+      "decoder_peak_buffer_capacity_bytes_x64": 338775,
+      "delta_events": 18673570,
+      "terminal_events": 1996,
+      "decode_seconds_x64": 1.83961,
+      "decode_bytes_per_second_x64": 466681000.0,
+      "ARMv7": "UNVERIFIED",
+      "USB": "UNVERIFIED",
+      "segments": [
+        {
+          "file": "song.scp",
+          "bytes": 859139090
+        }
+      ],
+      "file_bytes": 859139090,
+      "tail_frames": 256000,
+      "file_buffer_candidate_each_bytes": [
+        8388608,
+        16777216
+      ],
+      "audio_block_frames": 16
+    },
+    {
+      "file": "th06_07.mid",
+      "frames": 3599074,
+      "success": true,
+      "records": 22239564,
+      "event_bytes": 611867999,
+      "native_event_bytes": 604886636,
+      "native_average_event_bytes_per_second": 5789990.0,
+      "peak_frame_event_bytes": 2322,
+      "peak_frame_index": 432897,
+      "peak_aligned_16_frame_event_bytes": 21174,
+      "peak_aligned_16_first_frame": 704,
+      "logical_blocks": 14059,
+      "largest_block_bytes": 262568,
+      "decoder_peak_buffer_capacity_bytes_x64": 338775,
+      "delta_events": 13460236,
+      "terminal_events": 3585,
+      "decode_seconds_x64": 1.33415,
+      "decode_bytes_per_second_x64": 458619000.0,
+      "ARMv7": "UNVERIFIED",
+      "USB": "UNVERIFIED",
+      "segments": [
+        {
+          "file": "song.scp",
+          "bytes": 612317991
+        }
+      ],
+      "file_bytes": 612317991,
+      "tail_frames": 256000,
+      "file_buffer_candidate_each_bytes": [
+        8388608,
+        16777216
+      ],
+      "audio_block_frames": 16
+    }
+  ],
+  "current_phase0_regression": "Phase 0 A-D rerun in current C; independent original contract/directory",
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "ARMv7": "UNVERIFIED",
+  "USB": "UNVERIFIED",
+  "FPGA_resources": "UNVERIFIED",
+  "limit": "fixed-reference software parameter decoupling, complete original demo SMF once plus tail; excludes hardware timing, game loop restart and silicon equivalence"
+}

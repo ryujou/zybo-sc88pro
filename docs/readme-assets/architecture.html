@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zybo SC-88Pro · 上位机 / PS / PL 分工</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #edf1f6; color: #172b46; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; }
+    main { max-width: 1680px; margin: auto; padding: 28px; }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    nav span { font-size: 14px; color: #60738c; }
+    a { color: #285da9; font-size: 14px; text-decoration: none; padding: 10px 16px; background: #fff; border: 1px solid #d4deeb; border-radius: 9px; }
+    a:hover { background: #f4f8ff; }
+    figure { margin: 0; overflow-x: auto; border: 1px solid #d7e0eb; border-radius: 20px; background: #fff; box-shadow: 0 12px 40px #223c5910; }
+    img { display: block; width: 100%; min-width: 1100px; height: auto; }
+    @media (max-width: 700px) { main { padding: 14px; } nav span { font-size: 12px; } figure { border-radius: 12px; } }
+    @media print { body { background: #fff; } main { max-width: none; padding: 0; } nav { display: none; } figure { border: 0; box-shadow: none; overflow: visible; } img { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="图示文件">
+      <span>Zybo SC-88Pro · 系统架构与职责分工</span>
+      <a href="architecture.svg" download>下载 SVG</a>
+    </nav>
+    <figure>
+      <img src="architecture.svg" alt="上位机、PS、PL 三栏分工图，标注参数、Wave、Voice 发送、效果处理、DDR 缓存和 I²S 输出路径">
+    </figure>
+  </main>
+</body>
+</html>

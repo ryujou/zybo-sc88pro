@@ -1,0 +1,6 @@
+[submodule "external/gearmulator"]
+	path = external/gearmulator
+	url = https://github.com/dsp56300/gearmulator.git
+[submodule "external/tinyusb"]
+	path = external/tinyusb
+	url = https://github.com/hathach/tinyusb.git

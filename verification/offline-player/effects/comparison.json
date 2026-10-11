@@ -1,0 +1,41 @@
+{
+  "success": false,
+  "scope": "actual_Line_In_fixed_delay_and_fixed_gain_no_time_warp",
+  "sample_rate": 44100,
+  "frames": 2879994,
+  "fixed_channel_gains": [
+    0.6235592501357473,
+    0.6220087915938909
+  ],
+  "fixed_channel_dc_offsets": [
+    -0.06342159814484988,
+    -0.08282286065320664
+  ],
+  "normalized_rms_error": [
+    1.185238565483385,
+    1.2957503988873702
+  ],
+  "correlation": [
+    0.3067595519378001,
+    0.170410850561961
+  ],
+  "slices": [
+    {
+      "slice": "p",
+      "fixed_delay_samples": 24306,
+      "clock_error_ppm": -13.08731793086886,
+      "alignment_position_samples": 264600,
+      "clock_measurement_position_samples": 1792797,
+      "noise_rms": [
+        4.160888654887794,
+        4.135491372996582
+      ],
+      "signal_to_noise_db": [
+        52.0360224737678,
+        51.8791054134378
+      ],
+      "clipped_samples": 0
+    }
+  ],
+  "join_sample_indices": []
+}

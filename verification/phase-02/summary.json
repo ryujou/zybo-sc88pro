@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "phase": 2,
+  "status": "未通过",
+  "scope": "single_voice_hls",
+  "work_status": "STOPPED_BY_USER_ON_RESOURCE_EXCESS",
+  "commit": "9af8bb05bcef2994b5dbb60c5c028e978a72aecb",
+  "gate_status": {
+    "A": "通过",
+    "B": "未通过",
+    "C": "未开始",
+    "D": "未开始"
+  },
+  "hardware_verified": false,
+  "hardware_status": "NOT_TESTED_ON_HARDWARE",
+  "hls_csim": "CURRENT_CONFIGURATION_NOT_RERUN",
+  "native_test": "CURRENT_CONFIGURATION_NOT_RERUN",
+  "hls_synthesis": "RTL_GENERATED",
+  "hls_cosim": "NOT_RUN",
+  "hls_implementation": "NOT_RUN",
+  "hls_resources": {
+    "status": "OVER_CAPACITY",
+    "kind": "HLS_ESTIMATE_NOT_IMPLEMENTED",
+    "report": "build/hls-voice/single_voice/syn/report/xp3_voice_step_csynth.rpt",
+    "LUT": {"used": 39522, "available": 17600},
+    "FF": {"used": 32041, "available": 35200},
+    "DSP": {"used": 31, "available": 80},
+    "BRAM_18K": {"used": 4, "available": 120}
+  },
+  "hls_timing": {
+    "target_ns": 10,
+    "estimated_ns": 8.818,
+    "estimated_fmax_MHz": 113.41,
+    "implemented_fmax": "UNVERIFIED",
+    "latency_cycles": "UNKNOWN",
+    "initiation_interval": "UNKNOWN"
+  },
+  "limit": "Stopped on resource excess at user request. Phase 2 is incomplete; current configuration simulation, RTL cosim, negative tests, cumulative regression and D acceptance remain unverified.",
+  "golden_cases": 60,
+  "golden_frames": 15360,
+  "trace_frames": 256000,
+  "state_checkpoints": 17,
+  "observation_max_absolute_error": 0,
+  "trace_rom_reads": 49376,
+  "golden_state_columns": 116
+}

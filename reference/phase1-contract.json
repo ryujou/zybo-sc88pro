@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "sample_rate": 32000,
+  "record_bytes": 24,
+  "checkpoint_interval": 32768,
+  "boot_frames": 256000,
+  "case_frames": 256000,
+  "comparison": "exact signed integer PCM and explicit named state words; no gain, shift or tolerance",
+  "cold_start": "export begins at the final upstream powerCycle after factory SRAM setup; RESET clears XP and LSP, mappings survive; no H8 state snapshot is imported",
+  "record_layout": "little-endian <QI BBHII: frame:uint64, sequence:uint32, kind:uint8, chip:uint8, address:uint16, value:uint32, crc32:uint32",
+  "crc": "CRC-32/ISO-HDLC over the first 20 record bytes and any checkpoint payload; required Trace format check field, not an artifact digest",
+  "header": "80 bytes: SC88TRC1[8], version:u32, sample_rate:u32, boot_frames:u64, case_frames:u64, upstream_commit ASCII[40], checkpoint_interval:u32, header_crc32:u32",
+  "kinds": {"RESET":1, "WRITE8":2, "READ8":3, "RETURN_GATE":4, "IRQ_READ":5, "FRAME":6, "CHECKPOINT":7, "END":8},
+  "chips": {"board":0, "XP":1, "LSP":2},
+  "checkpoint": "value is payload byte count; payload is little-endian uint64 named field sequence. Observational assertions only, never injected into replay state. Initial, every 32768 completed frames, and END. Voice, XP control/PRAM/CRAM/IRAM/ERAM/datapath/serial, LSP program/IRAM/ERAM/datapath/config and return gate.",
+  "schedule": "frame zero is first post-constructor renderSample. Reads/writes/return gate/IRQ observations precede FRAME in exact recorded order. FRAME runs XP, observes SDOC and SDOB, processes LSP, then stages SDIA return shifted right 8 for the next frame. END follows precisely boot_frames+case_frames FRAME records.",
+  "extra_cases": [
+    {"id":"multi_same_frame", "expect":"active", "events":[[0,0,[192,0]],[3200,0,[144,48,100]],[3200,0,[144,60,90]],[3200,0,[144,67,110]],[19200,0,[176,64,127]],[35200,0,[128,48,0]],[35200,0,[128,60,0]],[35200,0,[128,67,0]],[67200,0,[176,64,0]]]},
+    {"id":"program_switch", "expect":"active", "events":[[0,0,[192,0]],[3200,0,[144,60,100]],[19200,0,[192,80]],[19200,0,[144,67,100]],[51200,0,[128,60,0]],[67200,0,[128,67,0]]]},
+    {"id":"gs_reset", "expect":"active", "events":[[0,0,[192,80]],[3200,0,[144,60,100]],[19200,0,[240,65,16,66,18,64,0,127,0,65,247]],[35200,0,[192,0]],[51200,0,[144,67,100]],[83200,0,[128,67,0]]]},
+    {"id":"lsp_insert", "expect":"active", "events":[[0,0,[240,65,16,66,18,64,65,34,1,92,247]],[1600,0,[240,65,16,66,18,64,3,0,1,17,43,247]],[3200,0,[192,80]],[9600,0,[144,60,100]],[32000,0,[240,65,16,66,18,64,3,3,127,59,247]],[64000,0,[240,65,16,66,18,64,3,0,1,35,25,247]],[96000,0,[128,60,0]]], "source":"Roland SC-88Pro Owner's Manual pp.93-94,196,199; https://cdn.roland.com/assets/media/pdf/SC-88PRO_OM.pdf"}
+  ],
+  "coverage_limit": "CPU decoupling of recorded fixed-reference executions only; not a native MIDI parameter generator, cycle-accurate Roland bus, silicon equivalence, HLS or board validation"
+}

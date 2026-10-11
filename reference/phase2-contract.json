@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "upstream_commit": "9af8bb05bcef2994b5dbb60c5c028e978a72aecb",
+  "sample_rate": 32000,
+  "part": "xc7z010clg400-1",
+  "target_clock_ns": 10,
+  "comparison": "exact signed integer outputs, complete Voice storage and runtime caches after every frame; no state injection after initialization",
+  "golden_format": "UTF-8 CSV with unique named columns; raw unsigned storage values, signed intermediate stage values; frame is the zero-based frame being completed, sampleClock is post-step",
+  "synthetic_frames": 256,
+  "synthetic_rom": "1048576 bytes: byte[i]=(i*73+(i>>8)+19)&255; exponent area i<32768 replaced by (i%11)|(((i+3)%11)<<4); source in host/voice_reference/main.cpp",
+  "cases": [
+    "silence", "fce_dpcm", "fetch_bus8", "physical_bus8", "exponent_zero", "ldpcm", "reserved_exponent",
+    "zero_pitch", "fractional_pitch", "maximum_pitch", "reverse_loop", "alternate_loop", "endpoint_hold", "address_wrap",
+    "consumer_blocked", "wave_halt", "pitch_linear", "pitch_log", "tvf_linear", "tvf_log", "amp_mod_ramp", "q_ramp", "amp_mod_sum",
+    "amp_curve_0", "amp_curve_1", "amp_curve_2", "amp_curve_3", "ramp_divider_1", "ramp_divider_2", "ramp_divider_3",
+    "filter_mode_0", "filter_mode_1", "filter_mode_2", "filter_mode_3", "filter_extreme", "tva_saturation", "tva_reset_decay",
+    "accumulator_wrap", "phase_wrap", "phase_sweep", "irq_retry", "retrigger", "power_reset",
+    "pair_structure_2", "pair_structure_3", "pair_structure_4", "pair_structure_5", "pair_structure_6", "pair_structure_7", "pair_structure_8", "pair_structure_9", "pair_structure_10",
+    "preload_odd", "consumer_limited", "unmapped_cs", "amp_hold_pending", "tva_zero", "filter_negative_truncation", "loop_irq", "ramp_irq"
+  ],
+  "trace_case": {"case":"piano", "first_voice":62, "frames":256000, "boot_frames":256000, "active_voice":63},
+  "state_widths": {
+    "waveControl_0000":20, "sampleCurrent_0100":20, "sampleLoop_0200":20, "sampleEnd_0300":20, "waveFetchState_0400":20,
+    "dpcmAccumulator_0c00":18, "pitchIncrement_0d00":18, "addressFraction_0e00":18, "playbackStateConfig_1000":18,
+    "tvfQDestination_1100":18, "pitchDestination_1200":18, "tvfFDestination_1300":18, "ampModDestination_1400":18, "ampDestination_1500":18,
+    "tvfQRamp_1600":18, "pitchRamp_1700":18, "tvfFRamp_1800":18, "ampModRamp_1900":18, "ampRamp_1a00":18,
+    "pitchCurrent_1b00":18, "tvfFCurrent_1c00":18, "ampModCurrent_1d00":18, "ampCurrent_1e00":18,
+    "filterConfig_2000":20, "tvfQCurrent_2100":20, "tvfFCoefficient_2200":20, "combinedAmp_2300":20,
+    "pitchStep_2400":20, "tvfFStep_2500":20, "ampStep_2600":20, "tvaGain_2700":16,
+    "filterBp_2800":24, "filterLp_2900":24, "filterOutput_2a00":24,
+    "waveCircularBuffer_0800":12, "mixer_3a00":16,
+    "resetState_3900.released":1, "resetState_3900.shadow":1,
+    "runtimeCache.ampCurve2EntryPending":1, "runtimeCache.runtimePhase":3, "runtimeCache.waveSampleFormat":2
+  },
+  "interface": {
+    "voice_step": "xp3_voice_step(frame_context, voice_state, wave_bytes, defer_filter, result); state is caller-owned and advances once per native frame",
+    "frame_context": "sampleClock:u64, voiceIndex:u6, irqStatus:u16, irqConfigMask:u16, interrupt:bool, acceptedThisFrame:bool, irqBlockedEvent:bool, eight CS descriptors and mappings",
+    "wave_mapping": "per CS: base:u25, size:u25, physical16:bool, voiceBankShift:u4, descriptor:u8; decoded bytes, shared read-only address space of 20971520 bytes; unmapped/out-of-range reads return zero as pinned XP",
+    "result": "interpolated signed20 sample, filterDue:bool, prior signed24 filterOutput for next-stage mixing, updated signed24 output in Voice state; IRQ updates retain actual voice index",
+    "pair_filter": "xp3_pair_filter(owner_state, partner_state, owner_sample, partner_sample): owner structure 2..10, booster, modes, both TVA gains; owner receives final output, partner output is zero",
+    "pair_order": "advance each source once at the same global clock with defer_filter=true, retaining pre-source TVA smoothing; then run pair filter if either filterDue; do not duplicate or skip source/ramp updates",
+    "reset": "power reset clears global/context and every Voice field; voice release reset parks runtime phase and clears filters on step, decays TVA with max(1,7*gain>>3), does not reset global sampleClock; release commits on host mask read",
+    "host_updates": "apply recorded host writes/read side effects before the frame; seed only the declared initial state, never load expected runtime state to repair drift",
+    "scope": "single Voice numerical engine plus explicitly paired TVF/TVA operation, not DDR cache, multi-Voice scheduling, XP DSP/LSP or I2S"
+  },
+  "stage_columns": {
+    "interpolation":"a=unpacked phase, b=interpolated signed sample; c..h=0",
+    "filter":"a=input, b=mode, c=nextLp, d=highPass, e=nextBp, f=selected, g=unsigned frequency, h=unsigned damping",
+    "tva":"a=input, b=unsigned gain=tvaGain<<4, c=saturated output; d..h=0",
+    "voice":"ROM-read and stage CSV voice column is the offset 0/1 within the observed pair; state columns retain physical Voice indices"
+  },
+  "future_negative_cases": ["one_interpolation_coefficient", "one_dpcm_state_bit", "one_ROM_byte", "one_frame_update_order"],
+  "reference_limits": [
+    "Reserved FCE exponents 11..15 produce zero delta and zero interpolation contribution, matching pinned reference, not a silicon claim",
+    "Descriptor bit 1, physical 8-bit reverse preload, nonzero launch counters and LDPCM producer modifier retain pinned upstream ordinary-path behaviour",
+    "The name PCM identifies the PCM sample engine; no invented raw-PCM mode bypasses the three documented pinned DPCM formats",
+    "100 MHz is a synthesis target only; II, latency, resources and achievable clock remain UNVERIFIED until actual HLS reports"
+  ]
+}

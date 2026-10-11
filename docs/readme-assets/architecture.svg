@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1260" viewBox="0 0 1600 1260" role="img" aria-labelledby="title description">
+  <title id="title">Zybo SC-88Pro：上位机、PS 与 PL 分工</title>
+  <desc id="description">上位机预计算 MIDI 与 GS 控制参数并解码 Wave，经 U 盘交给 Zybo。PS 读取、解包及管理 DDR；PL 执行 64 Voice 采样合成，把有序发送结果交给 PS 的 XP DSP/LSP。最终 PCM 缓存于 DDR，再经 PL 的 I²S 与 SSM2603 连续输出。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 9 4.5 0 9Z" fill="#52637b"/></marker>
+    <marker id="blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 9 4.5 0 9Z" fill="#3870d6"/></marker>
+    <style>
+      text{font-family:"Segoe UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#172b46}
+      .heading{font-size:31px;font-weight:700;letter-spacing:-.5px}
+      .subheading{font-size:18px;fill:#66758c}
+      .eyebrow{font-size:13px;font-weight:700;letter-spacing:2px;fill:#66809e}
+      .panel-title{font-size:27px;font-weight:700}
+      .panel-sub{font-size:16px;fill:#66758c}
+      .card-title{font-size:20px;font-weight:650}
+      .body{font-size:17px;fill:#465c76}
+      .small{font-size:15px;fill:#66758c}
+      .tag{font-size:13px;font-weight:700;letter-spacing:1px}
+      .card{fill:#fff;stroke:#dbe4ef;stroke-width:1.4}
+      .line{fill:none;stroke:#52637b;stroke-width:2;stroke-linejoin:round;marker-end:url(#arrow)}
+      .file-line{fill:none;stroke:#3870d6;stroke-width:2;stroke-dasharray:7 6;stroke-linejoin:round;marker-end:url(#blue-arrow)}
+      .label{font-size:14px;font-weight:600;fill:#52637b}
+    </style>
+  </defs>
+
+  <rect width="1600" height="1260" rx="24" fill="#fff"/>
+  <text x="40" y="43" class="eyebrow">ZYBO SC-88PRO · SYSTEM ARCHITECTURE</text>
+  <text x="40" y="90" class="heading">上位机、PS 与 PL 的分工</text>
+  <text x="40" y="126" class="subheading">电脑预计算控制 → 板端采样与效果合成 → DDR 缓存 → 整首连续播放</text>
+  <rect x="1302" y="57" width="258" height="43" rx="21.5" fill="#f1f5f9"/>
+  <text x="1431" y="84" text-anchor="middle" class="small">64 Voice · 32 kHz · XC7Z010</text>
+
+  <rect x="40" y="174" width="420" height="972" rx="22" fill="#eff5ff" stroke="#c8d9f5"/>
+  <rect x="40" y="213" width="5" height="60" rx="2.5" fill="#3870d6"/>
+  <text x="66" y="224" class="tag" style="fill:#3870d6">01 / HOST</text>
+  <text x="66" y="260" class="panel-title">上位机</text>
+  <text x="66" y="289" class="panel-sub">Windows · 固定 Gearmulator / 88emu</text>
+
+  <rect x="520" y="174" width="1040" height="972" rx="22" fill="#f7f9fc" stroke="#d5dfeb"/>
+  <text x="544" y="208" class="small" style="font-weight:650">ZYBO · ZYNQ-7000 · PS + PL 协同合成</text>
+  <rect x="538" y="227" width="430" height="901" rx="17" fill="#fff6ea" stroke="#f1dcc0"/>
+  <rect x="1052" y="227" width="488" height="901" rx="17" fill="#edf9f4" stroke="#c9e7da"/>
+  <text x="558" y="259" class="tag" style="fill:#b47123">02 / PROCESSING SYSTEM</text>
+  <text x="558" y="292" class="panel-title">PS · ARM 软件</text>
+  <text x="1072" y="259" class="tag" style="fill:#14815b">03 / PROGRAMMABLE LOGIC</text>
+  <text x="1072" y="292" class="panel-title">PL · FPGA 硬件</text>
+
+  <!-- 上位机：输入、控制计算、导出与存储。 -->
+  <rect x="64" y="320" width="372" height="110" rx="13" class="card"/>
+  <text x="84" y="354" class="card-title">原始输入</text>
+  <text x="84" y="384" class="body">MIDI + Control ROM v1.02</text>
+  <text x="84" y="410" class="body">Wave A / B / C · 共 20 MiB</text>
+
+  <rect x="64" y="480" width="372" height="270" rx="13" class="card"/>
+  <text x="84" y="516" class="card-title">运行控制模型，预计算参数</text>
+  <text x="84" y="554" class="body">MIDI / GS / SysEx</text>
+  <text x="84" y="585" class="body">Part / 音色映射 / 鼓组</text>
+  <text x="84" y="616" class="body">Voice 分配 / Ramp / 包络推进</text>
+  <text x="84" y="647" class="body">Pitch 增量 / TVF 系数</text>
+  <text x="84" y="678" class="body">combinedAmp / 效果程序与控制</text>
+  <line x1="84" y1="698" x2="416" y2="698" stroke="#e0e8f2"/>
+  <text x="84" y="727" class="small">22 个控制字段 · 保留帧内消费位置</text>
+
+  <rect x="64" y="810" width="372" height="100" rx="13" class="card"/>
+  <text x="84" y="846" class="card-title">生成离线输入</text>
+  <text x="84" y="875" class="body">带帧号的参数文件 + 解码 Wave</text>
+  <text x="84" y="897" class="small">保留控制事件与效果配置</text>
+
+  <rect x="64" y="965" width="372" height="155" rx="13" fill="#e3edff" stroke="#b8cef3"/>
+  <text x="84" y="1001" class="card-title">U 盘 · 离线传递</text>
+  <text x="84" y="1034" class="body">th06_01.scp · SC88PAR1</text>
+  <text x="84" y="1064" class="body">decoded-wave.bin</text>
+  <text x="84" y="1097" class="small">板端输入为参数与波形数据</text>
+
+  <path d="M250 430V480" class="line"/>
+  <path d="M250 750V810" class="line"/>
+  <path d="M250 910V965" class="file-line"/>
+
+  <!-- PS：数据管理与效果处理。 -->
+  <rect x="558" y="320" width="390" height="112" rx="13" class="card"/>
+  <text x="578" y="353" class="card-title">读取与调度</text>
+  <text x="578" y="384" class="body">USB Host / MSC / FAT32</text>
+  <text x="578" y="413" class="body">预读 / 解包 / DMA / 串口控制</text>
+
+  <rect x="558" y="482" width="390" height="98" rx="13" class="card"/>
+  <text x="578" y="518" class="card-title">DDR · Wave 波形存储</text>
+  <text x="578" y="548" class="body">20 MiB 波形一次加载到 DDR</text>
+  <text x="578" y="571" class="small">合成期间按需读取 DDR 波形</text>
+
+  <rect x="558" y="650" width="390" height="160" rx="13" fill="#fffaf4" stroke="#ecd5b4"/>
+  <text x="578" y="686" class="card-title">PS 执行边界</text>
+  <text x="578" y="724" class="body">管理文件与参数缓冲、Cache 一致性</text>
+  <text x="578" y="755" class="body">下发效果程序、系数与控制事件</text>
+  <text x="578" y="787" class="small">板端消费参数，MIDI 解析在上位机</text>
+
+  <rect x="558" y="854" width="390" height="130" rx="13" class="card"/>
+  <text x="578" y="887" class="card-title">XP DSP / LSP 定点效果</text>
+  <text x="578" y="918" class="body">按原 Mixer 时隙处理 Voice 发送</text>
+  <text x="578" y="946" class="body">效果历史 / 饱和与截断 / 返回开关</text>
+  <text x="578" y="973" class="small" style="fill:#a66d26">LSP 返回 → 下一帧 XP DSP</text>
+
+  <rect x="558" y="1036" width="390" height="84" rx="13" class="card"/>
+  <text x="578" y="1069" class="card-title">DDR · 最终 PCM 缓存</text>
+  <text x="578" y="1098" class="body">存储 PL + PS 合成的立体声音频</text>
+
+  <path d="M753 432V482" class="line"/>
+  <path d="M753 984V1036" class="line"/>
+
+  <!-- PL：参数、波形、Voice 与输出。 -->
+  <rect x="1072" y="320" width="448" height="112" rx="13" class="card"/>
+  <text x="1092" y="353" class="card-title">参数 DMA / 帧调度</text>
+  <text x="1092" y="384" class="body">按原生帧号与帧内位置消费参数</text>
+  <text x="1092" y="413" class="body">Voice 状态 RAM / 本地 IRQ 与 hold 仲裁</text>
+
+  <rect x="1072" y="482" width="448" height="98" rx="13" class="card"/>
+  <text x="1092" y="518" class="card-title">DDR 读取 / 采样缓存</text>
+  <text x="1092" y="548" class="body">按 Voice 地址取样，缓存波形数据</text>
+  <text x="1092" y="571" class="small">完整 Wave 位于 DDR，BRAM 保存局部状态</text>
+
+  <rect x="1072" y="640" width="448" height="170" rx="13" class="card"/>
+  <text x="1092" y="677" class="card-title">64 Voice · 共享采样运算核心</text>
+  <text x="1092" y="714" class="body">相位 / 地址 / Loop / PCM-DPCM</text>
+  <text x="1092" y="746" class="body">原生插值 / TVF-TVA / 配对</text>
+  <text x="1092" y="778" class="body">Ring / Booster / 定点样本运算</text>
+  <rect x="1372" y="656" width="127" height="30" rx="15" fill="#e4f5ec"/>
+  <text x="1435" y="677" text-anchor="middle" class="small" style="fill:#14815b;font-size:13px">时分复用</text>
+
+  <rect x="1072" y="854" width="448" height="80" rx="13" class="card"/>
+  <text x="1092" y="887" class="card-title">有序发送 / 结果 FIFO</text>
+  <text x="1092" y="916" class="body">保留 Voice、发送时隙与定点贡献</text>
+
+  <rect x="1072" y="1036" width="448" height="84" rx="13" class="card"/>
+  <text x="1092" y="1069" class="card-title">音频 FIFO / CDC / I²S</text>
+  <text x="1092" y="1098" class="body">独立音频时钟 · 32 kHz 立体声连续输出</text>
+
+  <path d="M1494 432V460H1531V611H1410V640" class="line"/>
+  <text x="1430" y="626" class="label">控制参数</text>
+  <path d="M1228 580V640" class="line"/>
+  <text x="1241" y="615" class="label">波形样本</text>
+  <path d="M1296 810V854" class="line"/>
+
+  <!-- 跨分区数据流。 -->
+  <path d="M436 1041H491V376H558" class="file-line"/>
+  <text x="479" y="804" transform="rotate(-90 479 804)" class="label" style="fill:#3870d6">J10 · USB Host 顺序读取</text>
+  <path d="M948 376H1072" class="line"/>
+  <text x="1010" y="362" text-anchor="middle" class="label">参数 / DMA</text>
+  <path d="M948 531H1072" class="line"/>
+  <text x="1010" y="517" text-anchor="middle" class="label">Wave / AXI</text>
+  <path d="M1072 905H948" class="line"/>
+  <text x="1010" y="890" text-anchor="middle" class="label">有序发送结果</text>
+  <path d="M948 1078H1072" class="line"/>
+  <text x="1010" y="1060" text-anchor="middle" class="label">缓存播放</text>
+
+  <path d="M1296 1120V1177" class="line"/>
+  <rect x="1063" y="1177" width="466" height="51" rx="13" fill="#172b46"/>
+  <text x="1296" y="1209" text-anchor="middle" style="font-size:18px;fill:#fff;font-weight:600">SSM2603 Codec → J5 耳机口</text>
+  <text x="40" y="1195" class="small">当前实板路径：先完整合成至 DDR，再整首连续播放。</text>
+  <text x="40" y="1223" class="small">控制更新遵循参数时相；最终播放节奏由音频时钟决定。</text>
+</svg>

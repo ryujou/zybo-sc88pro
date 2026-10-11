@@ -1,0 +1,241 @@
+{
+  "schema_version": 2,
+  "phase": 3,
+  "upstream_commit": "9af8bb05bcef2994b5dbb60c5c028e978a72aecb",
+  "part": "xc7z010clg400-1",
+  "sample_rate": 32000,
+  "clock_ns": 10,
+  "frame_cycles": 3125,
+  "voice_levels": [
+    1,
+    8,
+    32,
+    64
+  ],
+  "state_contract": "phase2-rtl-contract.json",
+  "scheduler": {
+    "cores": 1,
+    "order": "ascending physical voice index; even owner with pairRole=0x10 and structure field 1..9 consumes the following voice only when present",
+    "frame": "one 64-bit sampleClock for all voices; increment once after complete frame; reset accepted/blocked IRQ flags once at frame start",
+    "config": "Initial fixture/true external cfg transactions only; production frame cfg records are held until their audio due-frame and included in elapsed time. All PC/PL words remain compared. One shared parameter Voice core; no Ramp/coefficients in PL.",
+    "irq": "propagate status, interrupt, acceptedThisFrame and blocked from each command to the next; acknowledgements only between frames",
+    "boundary": "frame_valid is the due-frame request, not a cache-warm indication; admission and completion delays are included in the 3125-clock deadline",
+    "parameters": "Two bounded raw frame buffers prefetch from DDR; apply cfg at due, then consume sparse PC delta/terminal packets at actual core hook requests. A validated next later voice/stage or frame end supplies a no-change hook. Old/duplicate/wrong-stage packets and unconsumed records fault; missing/late input stalls without repeated state, deadline remains due-based."
+  },
+  "ddr": {
+    "base": 268435456,
+    "bytes": 20971520,
+    "chip_selects": 5,
+    "chip_bytes": 4194304,
+    "layout": "fixed-reference descrambled Wave ROM bytes; base + cs*4194304 + physical byte address; no DPCM predecode",
+    "unmapped": "cs>=5 or address>=4194304 returns byte zero, issues no AXI request, increments unmapped count; not a bus error",
+    "ownership": "PS loads and cleans DDR before synthesis is enabled; image is immutable until quiescent cache invalidation"
+  },
+  "axi": {
+    "master": "AXI4 read-only subset",
+    "hp0": "AXI3 64-bit; ARLEN low 4 bits and ARLOCK zero extension; AXI4 ARLEN high bits always zero; no writes or exclusives",
+    "address_bits": 32,
+    "data_bits": 64,
+    "id_bits": 6,
+    "id": 0,
+    "burst": "INCR",
+    "size": 3,
+    "beats": 4,
+    "alignment_bytes": 32,
+    "outstanding_max": 4,
+    "ordering": "single ID, in-order responses; FIFO records each issued line and destination; RLAST and RRESP checked",
+    "handshake": "VALID and payload stable while stalled; retire exactly once on VALID && READY; R channel accepted independently of AR",
+    "reset": "shared bus reset cancels transactions; local engine reset retains bus bookkeeping, drains all accepted bursts and discards data before clearing ready; never reuse stale responses",
+    "error": "non-OKAY, wrong RID, early/late RLAST or timeout latches fault; no successful frame publication; drain accepted traffic until shared reset or quiescent restart"
+  },
+  "cache": {
+    "line_bytes": 32,
+    "voices": 64,
+    "ways_per_voice": 4,
+    "data_bytes": 8192,
+    "storage": "dual-port BRAM data with per-voice tags; invalid before complete successful line fill",
+    "lookup": "registered demand and prefetch addresses; two immutable-ROM hot words return bytes in one cycle, ordinary resident BRAM hits in two cycles; misses wait for complete fills",
+    "replacement": "first invalid way else round-robin per physical voice; no cross-voice eviction",
+    "prefetch": "each measured frame first scans current sample and exponent lines across Voices, then loop targets and adjoining sample lines in playback direction; stop unaccepted hints when the frame commits, while accepted traffic drains normally; current address/control mirrors are updated only by host writes and actual completed Voice source feedback; queued prefetch progresses during demand fill waits with demand allocation priority; merge duplicate lines; no expected-vector address oracle",
+    "reset": "invalidate tags; discard outstanding fills after local reset drain; no hidden cache prewarming before measured frame start"
+  },
+  "mixer": {
+    "sends_per_voice": 4,
+    "destinations": 64,
+    "destination_bits": 6,
+    "level_bits": 10,
+    "input_bits": 24,
+    "contribution_bits": 25,
+    "result_bits": 24,
+    "divisor": 512,
+    "send_slots": [
+      0,
+      2,
+      2,
+      3
+    ],
+    "input": "preceding frame filterOutput, including silent and unreleased voices, before any voice update",
+    "scheduling": "mixer advances independently in physical Voice order; core may update an owner or pair only after mixer has captured their prior outputs; configuration writes update output mirrors between frames",
+    "contribution": "signed24 prior output * unsigned10 level, signed division by 512 toward zero; do not saturate the signed25 contribution",
+    "accumulate": "ascending voice then A/B/C/D; first send clears its destination even for zero contribution; each deposit saturates signed24; unreferenced cells retain their ping-pong-bank value",
+    "banks": 2,
+    "effect_boundary": "publish frame, voice, send, logical slot=4*voice+[0,2,2,3], destination and signed25 contribution as well as no-DSP mixed cells and seen mask; Phase 5 PS must interleave sends with DSP when program accesses mixer bank; mixed cells alone are not full effect output",
+    "fifo": "two complete result frames, reserve one entire slot at frame admission; stable data under backpressure; frame order preserved; no overwrite or dropping"
+  },
+  "timing_envelope": {
+    "ar_stall_max": 7,
+    "first_r_latency_max": 32,
+    "interbeat_gap_max": 3,
+    "output_stall_per_frame_max": 8,
+    "axi_timeout_cycles": 1024,
+    "deadline": "all voice state updates and ordered sends/mixed frame committed by clock 3125 from due-frame request, including admission, cache misses, DDR waits and FIFO backpressure",
+    "violation": "sticky deadline fault at clock 3126 if frame incomplete or due frame cannot be admitted; increment overrun once per affected frame; cannot convert an overrun into a passing sample",
+    "scope": "bounded simulation environment, not a measured PS/DDR guarantee; Phase 4 must measure bus latency and PS worst load on hardware",
+    "beyond_envelope": "long stalls and timeout tests must preserve protocol/order and report failure where deadline cannot be met; they are not evidence of realtime success",
+    "parameter_availability": "Initial two normalized frames ready before the first due; subsequent descriptors arrive one frame ahead. Parameter prefetch, due-time cfg consumption and hook stalls remain in the continuous schedule, sharing the same AXI envelope. Descriptor lateness, missing data and demand bursts test deadline failure as well as numerical stability; delayed ready cannot hide overrun.",
+    "parameter_stress": "Phase 1 measured maximum block/frame/16-frame window plus dense legitimate control and existing 1/8/32/64 locality, random jumps, loops, cold Cache and mixed AR/R/output stalls. Report actual normalized bytes and parameter AXI traffic; no old cycle result substitutes."
+  },
+  "statistics": {
+    "width": 32,
+    "overflow": "saturate at 0xffffffff; reset clears",
+    "counters": [
+      "frames",
+      "max_frame_cycles",
+      "cache_hits",
+      "cache_misses",
+      "axi_bursts",
+      "unmapped_reads",
+      "axi_errors",
+      "timeouts",
+      "overruns",
+      "output_underruns"
+    ],
+    "underrun": "consumer frame request while result FIFO empty after enable; do not fabricate a successful frame",
+    "watermarks": "result FIFO level 0..2, maximum level and sticky underrun/overrun; diagnostic readout does not affect synthesis state"
+  },
+  "result_stream": {
+    "data_bits": 64,
+    "frame_bits": 64,
+    "order": "4*voice_count send records in physical Voice order followed by 64 destination records; out_first/out_last mark one complete frame; out_frame is stable throughout it",
+    "fields": {
+      "type": [
+        63,
+        63
+      ],
+      "seen": [
+        62,
+        62
+      ],
+      "logical_slot": [
+        61,
+        54
+      ],
+      "voice": [
+        53,
+        48
+      ],
+      "send": [
+        47,
+        46
+      ],
+      "destination": [
+        45,
+        40
+      ],
+      "reserved_zero": [
+        39,
+        25
+      ],
+      "signed_payload": [
+        24,
+        0
+      ]
+    },
+    "send_record": "type=0, seen=0; signed25 contribution with original slot/voice/send/destination",
+    "mix_record": "type=1; seen identifies a deposit this frame; slot/voice/send zero; signed24 cell value sign-extended into signed25 payload",
+    "publication": "in-progress records remain private; commit makes the complete frame visible; failure aborts the reservation; consumer backpressure cannot expose or overwrite a partial frame",
+    "reset": "soft_reset clears core/state/mixer/result FIFO, drains accepted AXI traffic, and suppresses pre-reset fault statistics while initializing; ready stays low until drain and state scrub finish"
+  },
+  "resources": {
+    "device": {
+      "LUT": 17600,
+      "FF": 35200,
+      "DSP": 80,
+      "BRAM18": 120
+    },
+    "phase3_max": {
+      "LUT": 16000,
+      "FF": 30000,
+      "DSP": 64,
+      "BRAM18": 100
+    },
+    "phase4_reserve": {
+      "LUT": 1600,
+      "FF": 5200,
+      "DSP": 16,
+      "BRAM18": 20
+    }
+  },
+  "golden_cases": [
+    "silence",
+    "locality",
+    "random_jumps",
+    "sync_loop",
+    "endpoint_q",
+    "endpoint_f",
+    "mixed_pairs",
+    "pairs_endpoint",
+    "reverse_loop",
+    "unmapped",
+    "irq_contention",
+    "mixer_extremes"
+  ],
+  "required_rtl_tests": [
+    "levels_1_8_32_64_in_order",
+    "all_51_state_words",
+    "ordered_ROM_reads",
+    "ordered_sends_and_all_64_mix_cells",
+    "cold_cache_no_prewarm",
+    "max_latency_and_backpressure",
+    "simultaneous_loop_misses",
+    "random_address_updates",
+    "pair_structures_2_to_10",
+    "IRQ_first_event_only",
+    "reset_request_burst_response_output",
+    "FIFO_full_empty_and_stability",
+    "AXI_RRESP_RID_RLAST_timeout",
+    "one_missing_voice",
+    "one_wrong_address",
+    "one_cycle_overrun",
+    "phase0_phase1_phase2_cumulative"
+  ],
+  "measured": {
+    "resources": "UNVERIFIED",
+    "timing": "UNVERIFIED",
+    "worst_cycles": "UNVERIFIED",
+    "hardware": "NOT_TESTED_ON_HARDWARE"
+  },
+  "scope": "offline_parameter_multivoice_ddr_mixer_rtl",
+  "top": "pcm_parameter_voice_scheduler",
+  "parameter_contract": "reference/offline-parameter-contract.json",
+  "parameter_dma_contract": "reference/offline-parameter-dma-contract.json",
+  "parameter_dma": {
+    "region_base": 301989888,
+    "region_bytes": 524288,
+    "alignment_bytes": 32,
+    "raw_frame_buffers": 2,
+    "raw_frame_max_bytes": 16384,
+    "packet_lookahead": 2,
+    "frame_header_bytes": 32,
+    "source": "PS decodes validated SC88PAR1; only genuine host effects and PC control fields become DMA records. No expected audio state, PCM or IRQ outcome.",
+    "bus": "Single shared 64-bit AXI HP read master; parameter and wave line requests share the same four outstanding 32-byte INCR bursts. 11-bit local tag: bit10 parameter class, bit9 raw buffer, bits8:0 line row; wave class zero uses low8 cache tag. ID remains zero.",
+    "prefetch": "Descriptors may arrive before audio due; raw parameter buffering is independent of waveform Cache and never applies future cfg early. Initial parameter watermarks precede enable; waveform Cache remains cold. Continuous periodic tests include next-frame parameter DMA competing with the current-frame wave reads.",
+    "lifecycle": "Local reset clears descriptor/frame/packet ownership and drains shared accepted bursts before buffers are reused. Data RAM need not be scrubbed: only completely written validated buffer ranges are visible.",
+    "peaks": {
+      "phase1_peak_frame_event_bytes": 2322,
+      "phase1_peak_aligned_16_frame_event_bytes": 21174,
+      "phase1_largest_logical_block_bytes": 262568
+    },
+    "malformed": "Bad header/identity/count/length/opcode/word/stage/mask/width/hold/reason/order/padding and AXI error latch parameter fault; no successful affected frame publication."
+  }
+}

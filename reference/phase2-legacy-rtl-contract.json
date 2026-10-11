@@ -1,0 +1,850 @@
+{
+  "version": 1,
+  "scope": "single_voice_rtl",
+  "numerical_contract": "reference/phase2-contract.json",
+  "upstream_commit": "9af8bb05bcef2994b5dbb60c5c028e978a72aecb",
+  "part": "xc7z010clg400-1",
+  "sample_rate": 32000,
+  "target_clock_ns": 10,
+  "top": "xp3_voice",
+  "control_placement": "PL",
+  "state_fields": [
+    {
+      "name": "waveControl_0000",
+      "width": 20,
+      "word": 0,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "sampleCurrent_0100",
+      "width": 20,
+      "word": 1,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "sampleLoop_0200",
+      "width": 20,
+      "word": 2,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "sampleEnd_0300",
+      "width": 20,
+      "word": 3,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "waveFetchState_0400",
+      "width": 20,
+      "word": 4,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "dpcmAccumulator_0c00",
+      "width": 18,
+      "word": 5,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "pitchIncrement_0d00",
+      "width": 18,
+      "word": 6,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "addressFraction_0e00",
+      "width": 18,
+      "word": 7,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "playbackStateConfig_1000",
+      "width": 18,
+      "word": 8,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "tvfQDestination_1100",
+      "width": 18,
+      "word": 9,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "pitchDestination_1200",
+      "width": 18,
+      "word": 10,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "tvfFDestination_1300",
+      "width": 18,
+      "word": 11,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "ampModDestination_1400",
+      "width": 18,
+      "word": 12,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "ampDestination_1500",
+      "width": 18,
+      "word": 13,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "tvfQRamp_1600",
+      "width": 18,
+      "word": 14,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "pitchRamp_1700",
+      "width": 18,
+      "word": 15,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "tvfFRamp_1800",
+      "width": 18,
+      "word": 16,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "ampModRamp_1900",
+      "width": 18,
+      "word": 17,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "ampRamp_1a00",
+      "width": 18,
+      "word": 18,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "pitchCurrent_1b00",
+      "width": 18,
+      "word": 19,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "tvfFCurrent_1c00",
+      "width": 18,
+      "word": 20,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "ampModCurrent_1d00",
+      "width": 18,
+      "word": 21,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "ampCurrent_1e00",
+      "width": 18,
+      "word": 22,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "filterConfig_2000",
+      "width": 20,
+      "word": 23,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "tvfQCurrent_2100",
+      "width": 20,
+      "word": 24,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "tvfFCoefficient_2200",
+      "width": 20,
+      "word": 25,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "combinedAmp_2300",
+      "width": 20,
+      "word": 26,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "pitchStep_2400",
+      "width": 20,
+      "word": 27,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "tvfFStep_2500",
+      "width": 20,
+      "word": 28,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "ampStep_2600",
+      "width": 20,
+      "word": 29,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source_decode_or_ramp",
+      "reset": 0
+    },
+    {
+      "name": "tvaGain_2700",
+      "width": 16,
+      "word": 30,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "pre_source_tva",
+      "reset": 0
+    },
+    {
+      "name": "filterBp_2800",
+      "width": 24,
+      "word": 31,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "filter_or_release_clear",
+      "reset": 0
+    },
+    {
+      "name": "filterLp_2900",
+      "width": 24,
+      "word": 32,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "filter_or_release_clear",
+      "reset": 0
+    },
+    {
+      "name": "filterOutput_2a00",
+      "width": 24,
+      "word": 33,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "filter_or_release_clear",
+      "reset": 0
+    },
+    {
+      "name": "waveCircularBuffer_0800[0]",
+      "width": 12,
+      "word": 34,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "waveCircularBuffer_0800[1]",
+      "width": 12,
+      "word": 35,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "waveCircularBuffer_0800[2]",
+      "width": 12,
+      "word": 36,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "waveCircularBuffer_0800[3]",
+      "width": 12,
+      "word": 37,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "waveCircularBuffer_0800[4]",
+      "width": 12,
+      "word": 38,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "waveCircularBuffer_0800[5]",
+      "width": 12,
+      "word": 39,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "waveCircularBuffer_0800[6]",
+      "width": 12,
+      "word": 40,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "waveCircularBuffer_0800[7]",
+      "width": 12,
+      "word": 41,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "source",
+      "reset": 0
+    },
+    {
+      "name": "mixer_3a00[0]",
+      "width": 16,
+      "word": 42,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "host_event",
+      "reset": 0
+    },
+    {
+      "name": "mixer_3a00[1]",
+      "width": 16,
+      "word": 43,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "host_event",
+      "reset": 0
+    },
+    {
+      "name": "mixer_3a00[2]",
+      "width": 16,
+      "word": 44,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "host_event",
+      "reset": 0
+    },
+    {
+      "name": "mixer_3a00[3]",
+      "width": 16,
+      "word": 45,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "host_event",
+      "reset": 0
+    },
+    {
+      "name": "resetState_3900.released",
+      "width": 1,
+      "word": 46,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "host_event_or_launch",
+      "reset": 0
+    },
+    {
+      "name": "resetState_3900.shadow",
+      "width": 1,
+      "word": 47,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "host_event_or_launch",
+      "reset": 0
+    },
+    {
+      "name": "runtimeCache.ampCurve2EntryPending",
+      "width": 1,
+      "word": 48,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "host_event_or_launch",
+      "reset": 0
+    },
+    {
+      "name": "runtimeCache.runtimePhase",
+      "width": 3,
+      "word": 49,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "host_event_or_launch",
+      "reset": 0
+    },
+    {
+      "name": "runtimeCache.waveSampleFormat",
+      "width": 2,
+      "word": 50,
+      "owner": "PL",
+      "storage": "unsigned_bits",
+      "update": "host_event_or_launch",
+      "reset": 0
+    }
+  ],
+  "ports": [
+    {
+      "name": "clk",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "rst",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cmd_valid",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cmd_pair",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cmd_irq_interrupt",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cmd_irq_accepted",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cmd_irq_blocked",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "done_ready",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cfg_valid",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cfg_write",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cfg_rsp_ready",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "rom_req_ready",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "rom_rsp_valid",
+      "direction": "input",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cmd_ready",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "done_valid",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "done_irq_interrupt",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "done_irq_accepted",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "done_irq_blocked",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cfg_ready",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cfg_rsp_valid",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "rom_req_valid",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "rom_rsp_ready",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "rom_req_partner",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "ready",
+      "direction": "output",
+      "width": 1,
+      "signed": false
+    },
+    {
+      "name": "cmd_frame",
+      "direction": "input",
+      "width": 64,
+      "signed": false
+    },
+    {
+      "name": "cmd_voice",
+      "direction": "input",
+      "width": 6,
+      "signed": false
+    },
+    {
+      "name": "cfg_voice",
+      "direction": "input",
+      "width": 6,
+      "signed": false
+    },
+    {
+      "name": "cfg_word",
+      "direction": "input",
+      "width": 6,
+      "signed": false
+    },
+    {
+      "name": "cmd_irq_status",
+      "direction": "input",
+      "width": 16,
+      "signed": false
+    },
+    {
+      "name": "cmd_irq_mask",
+      "direction": "input",
+      "width": 16,
+      "signed": false
+    },
+    {
+      "name": "cmd_descriptors",
+      "direction": "input",
+      "width": 64,
+      "signed": false
+    },
+    {
+      "name": "cmd_physical16",
+      "direction": "input",
+      "width": 8,
+      "signed": false
+    },
+    {
+      "name": "rom_rsp_data",
+      "direction": "input",
+      "width": 8,
+      "signed": false
+    },
+    {
+      "name": "cmd_bank_shifts",
+      "direction": "input",
+      "width": 32,
+      "signed": false
+    },
+    {
+      "name": "cfg_wdata",
+      "direction": "input",
+      "width": 32,
+      "signed": false
+    },
+    {
+      "name": "cfg_rsp_data",
+      "direction": "output",
+      "width": 32,
+      "signed": false
+    },
+    {
+      "name": "done_frame",
+      "direction": "output",
+      "width": 64,
+      "signed": false
+    },
+    {
+      "name": "done_voice",
+      "direction": "output",
+      "width": 6,
+      "signed": false
+    },
+    {
+      "name": "done_irq_status",
+      "direction": "output",
+      "width": 16,
+      "signed": false
+    },
+    {
+      "name": "done_filter_due",
+      "direction": "output",
+      "width": 2,
+      "signed": false
+    },
+    {
+      "name": "done_prior_owner",
+      "direction": "output",
+      "width": 24,
+      "signed": true
+    },
+    {
+      "name": "done_prior_partner",
+      "direction": "output",
+      "width": 24,
+      "signed": true
+    },
+    {
+      "name": "done_output_owner",
+      "direction": "output",
+      "width": 24,
+      "signed": true
+    },
+    {
+      "name": "done_output_partner",
+      "direction": "output",
+      "width": 24,
+      "signed": true
+    },
+    {
+      "name": "done_sample_owner",
+      "direction": "output",
+      "width": 20,
+      "signed": true
+    },
+    {
+      "name": "done_sample_partner",
+      "direction": "output",
+      "width": 20,
+      "signed": true
+    },
+    {
+      "name": "done_source_owner",
+      "direction": "output",
+      "width": 40,
+      "signed": false
+    },
+    {
+      "name": "done_source_partner",
+      "direction": "output",
+      "width": 40,
+      "signed": false
+    },
+    {
+      "name": "rom_req_cs",
+      "direction": "output",
+      "width": 3,
+      "signed": false
+    },
+    {
+      "name": "rom_req_address",
+      "direction": "output",
+      "width": 24,
+      "signed": false
+    }
+  ],
+  "state_ram": {
+    "voices": 64,
+    "word_bits": 32,
+    "words_per_voice": 64,
+    "banks": 8,
+    "bank_depth": 512,
+    "read_latency": 1,
+    "address": "bank=word%8; row=voice*8+word//8",
+    "unused_words": "zero; writes prohibited",
+    "writeback": "only dirty words; cfg disabled during command; no whole-state reset fanout"
+  },
+  "resources": {
+    "unit": "BRAM18_equivalent",
+    "device": {
+      "LUT": 17600,
+      "FF": 35200,
+      "DSP": 80,
+      "BRAM18": 120
+    },
+    "core_max": {
+      "LUT": 12000,
+      "FF": 16000,
+      "DSP": 32,
+      "BRAM18": 24
+    },
+    "system_reserve": {
+      "LUT": 5600,
+      "FF": 19200,
+      "DSP": 48,
+      "BRAM18": 96
+    }
+  },
+  "cycles": {
+    "frame": 3125,
+    "single_max": 44,
+    "pair_max": 88,
+    "voices": 64,
+    "system_reserve": 309,
+    "rom_outstanding": 1,
+    "nominal_rom_response_cycles": 1,
+    "reset_max": 512,
+    "definition": "Acceptance targets, not measurements. Command handshake to done_valid includes state RAM and nominal ROM responses; pair covers both sources and shared paired filter. Excess ROM stalls and done backpressure count in total frame wall time. All launch/ramp/loop modes obey the same bound."
+  },
+  "protocol": {
+    "handshake": "Rising clk with valid && ready; source holds valid and payload until accepted; no combinational ready->valid dependency",
+    "commands": "One outstanding command including done response. cfg has priority over cmd at idle. cmd_pair requires even cmd_voice <=62 and pairRole/structure 2..10; scheduler derives this from independently maintained state. Single advances exactly one physical voice.",
+    "frame": "cmd_frame is pre-step sampleClock, shared across all voices. Scheduler clears accepted/blocked once at frame start, chains actual done IRQ context into next command, then increments clock once after all voices. Core echoes frame unchanged.",
+    "config": "One outstanding cfg response. Reads/writes use named state words; writes mask to field width; response returns post-write value. Accessible only when ready and no command is pending; a new configuration may be accepted on the same clock that the preceding response is consumed, permitting one write per clock. A stalled response blocks new configuration. Used for initial seeding, explicit external events, and assertion reads, never expected-state repair.",
+    "rom": "CS plus banked byte offset after physical bus alignment, in exact reference order. One outstanding request, response accepted no earlier than next edge after request. Response is decoded ROM byte; responder returns zero for unmapped/out-of-range access. No speculative, repeated, skipped or reordered reads. Mapping remains stable throughout command.",
+    "completion": "State writes finish before done_valid. Result and IRQ context stable while !done_ready. done_source_owner/partner pack final waveControl[19:0] in bits 39:20 and sampleCurrent[19:0] in bits 19:0 for state-derived prefetch; non-pair partner is zero. Backpressure causes no further source/ramp/state update; next command only after response handshake.",
+    "reset": "Synchronous active-high rst cancels all transactions and response valids. On deassertion scrub 512 rows of all eight banks in parallel, holding ready/cmd_ready/cfg_ready low. ready rises after zeroing. Responder cancels outstanding reads on same rst; stale responses prohibited. Scheduler resets sampleClock and IRQ context; physical ROM mappings persist.",
+    "stalls": "Unbounded external stall is legal for numerical correctness but cannot pass realtime acceptance. Count all excess ROM request/response wait cycles and done stalls against frame reserve; no timeout dropping samples."
+  },
+  "required_rtl_tests": [
+    "60_synthetic_cases",
+    "piano_256000_frames",
+    "all_state_words",
+    "rom_address_and_order",
+    "interpolation_filter_tva_stages",
+    "irq_arbitration",
+    "one_coefficient",
+    "one_state_bit",
+    "one_rom_byte",
+    "one_update_phase",
+    "rom_wait_0_1_7_31",
+    "done_backpressure",
+    "reset_idle_request_response_done",
+    "duplicate_or_missing_rom_detection",
+    "phase0_phase1_cumulative"
+  ],
+  "measured": {
+    "resources": "UNVERIFIED",
+    "timing": "UNVERIFIED",
+    "worst_cycles": "UNVERIFIED",
+    "hardware": "NOT_TESTED_ON_HARDWARE"
+  }
+}
